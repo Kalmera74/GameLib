@@ -21,11 +21,15 @@ namespace Mobiversite.GameLib.DevLib.Core
     }
     public class SceneManager : MonoBehaviour
     {
-
+        public static SceneManager Instance;
         [SerializeField] private int TotalLoadableSceneCount = 0;
         [SerializeField] private int CurrentlyLoadedSceneIndex = 0;
         [SerializeField] private List<SceneDefinition> Scenes = new List<SceneDefinition>();
 
+        void Awake()
+        {
+            Instance = this;
+        }
         public void LoadScenesToList()
         {
 
