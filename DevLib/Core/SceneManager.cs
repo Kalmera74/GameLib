@@ -30,6 +30,7 @@ namespace Mobiversite.GameLib.DevLib.Core
         {
 
             Scenes.Clear();
+            TotalLoadableSceneCount = 0;
 
             int totalSceneCount = UnitySceneManager.sceneCount;
 
