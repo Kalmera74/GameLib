@@ -28,7 +28,17 @@ namespace Mobiversite.GameLib.DevLib.Core
 
         void Awake()
         {
-            Instance = this;
+            if (Instance == null)
+            {
+
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                DestroyImmediate(gameObject);
+            }
+
         }
         public void LoadScenesToList()
         {
@@ -73,6 +83,10 @@ namespace Mobiversite.GameLib.DevLib.Core
             {
                 LoadSceneAt(previousSceneIndex, loadMode);
             }
+        }
+        public void ReloadCurrentScene(LoadSceneMode loadMode = LoadSceneMode.Single)
+        {
+            LoadSceneAt(CurrentlyLoadedSceneIndex, loadMode);
         }
     }
 }
