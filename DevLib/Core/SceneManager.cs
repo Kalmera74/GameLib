@@ -25,7 +25,7 @@ namespace Mobiversite.GameLib.DevLib.Core
     {
         public static SceneManager Instance;
         private int TotalLoadableSceneCount = 0;
-        private int CurrentlyLoadedSceneIndex = 0;
+        private int CurrentlyLoadedSceneIndex = -1;
 
         public event Action OnBeforeSceneLoaded;
         public event Action OnAfterLevelLoaded;
@@ -65,6 +65,10 @@ namespace Mobiversite.GameLib.DevLib.Core
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 LoadPreviousLevel();
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                ReloadCurrentScene();
             }
 
         }
