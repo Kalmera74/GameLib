@@ -40,6 +40,10 @@ namespace Mobiversite.GameLib.DevLib.Core
             }
 
         }
+        void Start()
+        {
+            LoadNextLevel();
+        }
         public void LoadScenesToList()
         {
 
