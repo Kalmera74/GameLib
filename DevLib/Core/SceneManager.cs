@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,9 +28,10 @@ namespace Mobiversite.GameLib.DevLib.Core
         public static SceneManager Instance;
         private int TotalLoadableSceneCount = 0;
         private int CurrentlyLoadedSceneIndex = -1;
-
+        private int BootSceneIndex = 0;
         public event Action OnBeforeSceneLoaded;
         public event Action OnAfterLevelLoaded;
+        public event Action<float> OnWhileLevelLoading;
 
         [SerializeField] private LoadSceneMode BootSceneLoadingMode = LoadSceneMode.Single;
         [SerializeField] private SceneType ExcludeFromLevelNavigation;
@@ -53,25 +56,10 @@ namespace Mobiversite.GameLib.DevLib.Core
         {
             TotalLoadableSceneCount = NavigableScenes.Count;
             LoadNextLevel(BootSceneLoadingMode);
+            var bootScene = Scenes.First(s => s.SceneType.Equals(SceneType.Boot));
+            BootSceneIndex = Scenes.IndexOf(bootScene);
         }
 
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.RightShift))
-            {
-                LoadNextLevel();
-            }
-
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                LoadPreviousLevel();
-            }
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                ReloadCurrentScene();
-            }
-
-        }
         public void LoadScenesToList()
         {
 
@@ -102,16 +90,34 @@ namespace Mobiversite.GameLib.DevLib.Core
 
         public void LoadSceneAt(int sceneIndex, LoadSceneMode loadMode = LoadSceneMode.Single)
         {
+            StartCoroutine(LoadSceneAsync(sceneIndex, loadMode));
+        }
+
+        private IEnumerator LoadSceneAsync(int sceneIndex, LoadSceneMode loadMode = LoadSceneMode.Single)
+        {
             var convertedIndex = ConvertToNavigableIndex(sceneIndex);
 
             OnBeforeSceneLoaded?.Invoke();
 
-            UnitySceneManager.LoadScene(convertedIndex, loadMode);
+            var asyncHandler = UnitySceneManager.LoadSceneAsync(convertedIndex, loadMode);
+
+            asyncHandler.completed += SceneAsyncLoaded;
+
+            while (!asyncHandler.isDone)
+            {
+                OnWhileLevelLoading?.Invoke(asyncHandler.progress);
+                yield return null;
+            }
+
             CurrentlyLoadedSceneIndex = sceneIndex;
 
-            OnAfterLevelLoaded?.Invoke();
-        }
 
+        }
+        private void SceneAsyncLoaded(AsyncOperation operation)
+        {
+            OnAfterLevelLoaded?.Invoke();
+
+        }
         private int ConvertToNavigableIndex(int sceneIndex)
         {
 

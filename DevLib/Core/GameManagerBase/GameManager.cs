@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mobiversite.Assets._Project.Scripts;
 using Mobiversite.GameLib.DevLib.Core.GameManagerBase.Modes;
 using Mobiversite.GameLib.DevLib.Core.GameManagerBase.States;
 using UnityEngine;
@@ -20,7 +21,6 @@ namespace Mobiversite.GameLib.DevLib.Core.GameManagerBase
 
         private IGameState _state;
         private IOperationMode _operationMode;
-
         public static GameManager Instance;
         [SerializeField] private bool IsUniversal = false;
         [SerializeField] private List<Object> OperationModes = new List<Object>();
@@ -81,6 +81,17 @@ namespace Mobiversite.GameLib.DevLib.Core.GameManagerBase
             {
                 OperationModes.Add(upCastedMode);
             }
+        }
+
+        public void RemoveState(IGameState state)
+        {
+            var upCastedState = (Object)state;
+            States.Remove(upCastedState);
+        }
+        public void RemoveMode(IOperationMode mode)
+        {
+            var upCastedMode = (Object)mode;
+            OperationModes.Remove(upCastedMode);
         }
         public void SetOperationMode(IOperationMode mode)
         {
