@@ -43,11 +43,19 @@ namespace Mobiversite.GameLib.DevLib.Core.GameManagerBase
 
 
         }
+        public IGameState GetActiveState()
+        {
+            return _state;
+        }
+        public IOperationMode GetActiveOperationMode()
+        {
+            return _operationMode;
+        }
 
         public void SetState(IGameState state)
         {
             _state = state;
-
+            AddToStates(state);
             if (_operationMode is null)
             {
                 throw new System.ArgumentNullException("Operation Mode cannot be null. Set the Operation Mode before you set the State");
@@ -56,8 +64,27 @@ namespace Mobiversite.GameLib.DevLib.Core.GameManagerBase
             _operationMode.Operate(_state);
 
         }
+
+        private void AddToStates(IGameState state)
+        {
+            var upCastedState = (Object)state;
+            if (!States.Contains(upCastedState))
+            {
+                States.Add(upCastedState);
+            }
+        }
+
+        private void AddToModes(IOperationMode mode)
+        {
+            var upCastedMode = (Object)mode;
+            if (!OperationModes.Contains(upCastedMode))
+            {
+                OperationModes.Add(upCastedMode);
+            }
+        }
         public void SetOperationMode(IOperationMode mode)
         {
+            AddToModes(mode);
             _operationMode = mode;
         }
 
