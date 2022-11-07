@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mobiversite
+namespace Mobiversite.GameLib.DevLib.Camera
 {
     public class OrthographicSizeFitter : MonoBehaviour
     {
-        [SerializeField] private Camera MainCamera;
+        [SerializeField] private UnityEngine.Camera MainCamera;
         [SerializeField] private bool UseBoundCollider = true;
         [SerializeField] private float Padding = .5f;
         [SerializeField] private Collider2D BoundCollider;
@@ -16,7 +16,7 @@ namespace Mobiversite
         {
             if (MainCamera is null)
             {
-                MainCamera = Camera.main;
+                MainCamera = UnityEngine.Camera.main;
             }
             FitCameraToBounds();
         }

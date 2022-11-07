@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mobiversite.Assets._Project.Scripts;
+
 using Mobiversite.GameLib.DevLib.Core.GameManagerBase.Modes;
 using Mobiversite.GameLib.DevLib.Core.GameManagerBase.States;
 using UnityEngine;
@@ -40,9 +41,8 @@ namespace Mobiversite.GameLib.DevLib.Core.GameManagerBase
             {
                 DestroyImmediate(gameObject);
             }
-
-
         }
+       
         public IGameState GetActiveState()
         {
             return _state;

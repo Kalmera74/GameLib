@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Mobiversite.GameLib.DevLib.Core.SaveSystem;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,11 +11,12 @@ using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 namespace Mobiversite.GameLib.DevLib.Core
 {
     [Serializable]
-    [Flags]
+
     public enum SceneType
     {
-        Boot = 1,
-        Normal
+        Boot,
+        Normal,
+        Menu
     }
     [Serializable]
     public struct SceneDefinition
@@ -29,12 +31,13 @@ namespace Mobiversite.GameLib.DevLib.Core
         private int TotalLoadableSceneCount = 0;
         private int CurrentlyLoadedSceneIndex = -1;
         private int BootSceneIndex = 0;
+        private int MenuSceneIndex = 1;
         public event Action OnBeforeSceneLoaded;
         public event Action OnAfterLevelLoaded;
         public event Action<float> OnWhileLevelLoading;
 
         [SerializeField] private LoadSceneMode BootSceneLoadingMode = LoadSceneMode.Single;
-        [SerializeField] private SceneType ExcludeFromLevelNavigation;
+        [SerializeField] private SceneType[] ExcludeFromLevelNavigation;
         [SerializeField] private List<SceneDefinition> Scenes = new List<SceneDefinition>();
         [SerializeField] private List<SceneDefinition> NavigableScenes = new List<SceneDefinition>();
 
@@ -54,12 +57,37 @@ namespace Mobiversite.GameLib.DevLib.Core
         }
         void Start()
         {
+
             TotalLoadableSceneCount = NavigableScenes.Count;
-            LoadNextLevel(BootSceneLoadingMode);
+
             var bootScene = Scenes.First(s => s.SceneType.Equals(SceneType.Boot));
             BootSceneIndex = Scenes.IndexOf(bootScene);
-        }
 
+            var menuScene = Scenes.First(s => s.SceneType.Equals(SceneType.Menu));
+            MenuSceneIndex = Scenes.IndexOf(menuScene);
+
+            LoadSceneAt(MenuSceneIndex, BootSceneLoadingMode);
+
+            var lastPlayedLevel = SaveManager.Instance.GetLastLoadedScene();
+            if (lastPlayedLevel == -1)
+            {
+                lastPlayedLevel = 0;
+                SaveManager.Instance.SaveLastPlayedScene(lastPlayedLevel);
+            }
+
+        }
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.RightShift))
+            {
+                LoadNextLevel();
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                LoadPreviousLevel();
+            }
+        }
         public void LoadScenesToList()
         {
 
@@ -69,7 +97,8 @@ namespace Mobiversite.GameLib.DevLib.Core
 
             foreach (var sceneData in Scenes)
             {
-                if (!sceneData.SceneType.HasFlag(ExcludeFromLevelNavigation))
+
+                if (!ExcludeFromLevelNavigation.Contains(sceneData.SceneType))
                 {
                     NavigableScenes.Add(sceneData);
                 }
@@ -87,7 +116,17 @@ namespace Mobiversite.GameLib.DevLib.Core
             EditorUtility.SetDirty(this);
 
         }
+        public SceneDefinition GetCurrentSceneDefinition()
+        {
+            return NavigableScenes[CurrentlyLoadedSceneIndex];
+        }
+        public void LoadNavigableSceneAt(int sceneIndex, LoadSceneMode loadMode = LoadSceneMode.Single)
+        {
+            var realSceneIndex = ConvertFromNavigableToScenesIndex(sceneIndex);
+            StartCoroutine(LoadSceneAsync(realSceneIndex, loadMode));
+            SaveManager.Instance.SaveLastPlayedScene(sceneIndex);
 
+        }
         public void LoadSceneAt(int sceneIndex, LoadSceneMode loadMode = LoadSceneMode.Single)
         {
             StartCoroutine(LoadSceneAsync(sceneIndex, loadMode));
@@ -95,11 +134,9 @@ namespace Mobiversite.GameLib.DevLib.Core
 
         private IEnumerator LoadSceneAsync(int sceneIndex, LoadSceneMode loadMode = LoadSceneMode.Single)
         {
-            var convertedIndex = ConvertToNavigableIndex(sceneIndex);
-
             OnBeforeSceneLoaded?.Invoke();
 
-            var asyncHandler = UnitySceneManager.LoadSceneAsync(convertedIndex, loadMode);
+            var asyncHandler = UnitySceneManager.LoadSceneAsync(sceneIndex, loadMode);
 
             asyncHandler.completed += SceneAsyncLoaded;
 
@@ -109,26 +146,29 @@ namespace Mobiversite.GameLib.DevLib.Core
                 yield return null;
             }
 
-            CurrentlyLoadedSceneIndex = sceneIndex;
+            CurrentlyLoadedSceneIndex = ConvertFromScenesToNavigableIndex(sceneIndex);
 
+        }
 
+        private int ConvertFromScenesToNavigableIndex(int index)
+        {
+            var scene = Scenes[index];
+            var convertedIndex = NavigableScenes.IndexOf(scene);
+            return convertedIndex;
+        }
+        private int ConvertFromNavigableToScenesIndex(int index)
+        {
+            var scene = NavigableScenes[index];
+            var convertedIndex = Scenes.IndexOf(scene);
+            return convertedIndex;
         }
         private void SceneAsyncLoaded(AsyncOperation operation)
         {
             OnAfterLevelLoaded?.Invoke();
-
-        }
-        private int ConvertToNavigableIndex(int sceneIndex)
-        {
-
-            var proxyScene = NavigableScenes[sceneIndex];
-            var intendedScene = Scenes.IndexOf(proxyScene);
-            return intendedScene;
         }
 
         public void LoadNextLevel(LoadSceneMode loadMode = LoadSceneMode.Single)
         {
-
             int nextSceneIndex = CurrentlyLoadedSceneIndex + 1;
 
             if (nextSceneIndex >= TotalLoadableSceneCount)
@@ -136,7 +176,7 @@ namespace Mobiversite.GameLib.DevLib.Core
                 nextSceneIndex = 0;
             }
 
-            LoadSceneAt(nextSceneIndex, loadMode);
+            LoadNavigableSceneAt(nextSceneIndex, loadMode);
         }
         public void LoadPreviousLevel(LoadSceneMode loadMode = LoadSceneMode.Single)
         {
@@ -145,11 +185,17 @@ namespace Mobiversite.GameLib.DevLib.Core
             {
                 previousSceneIndex = NavigableScenes.Count - 1;
             }
-            LoadSceneAt(previousSceneIndex, loadMode);
+            LoadNavigableSceneAt(previousSceneIndex, loadMode);
         }
         public void ReloadCurrentScene(LoadSceneMode loadMode = LoadSceneMode.Single)
         {
-            LoadSceneAt(CurrentlyLoadedSceneIndex, loadMode);
+            LoadNavigableSceneAt(CurrentlyLoadedSceneIndex, loadMode);
+        }
+
+        public void LoadLastSavedLevel()
+        {
+            var lastLoadedLevelIndex = SaveManager.Instance.GetLastLoadedScene();
+            LoadNavigableSceneAt(lastLoadedLevelIndex);
         }
     }
 }

@@ -35,5 +35,7 @@ namespace Mobiversite.GameLib.DevLib.UI
                 DestroyImmediate(gameObject);
             }
         }
+
+       
     }
 }
