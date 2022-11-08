@@ -7,7 +7,7 @@ namespace Mobiversite.GameLib.DevLib.Core.GameManagerBase.States
     {
         public void Execute()
         {
-            Debug.Log($"!!! Initializing Some Stuff");
+            
         }
     }
 }

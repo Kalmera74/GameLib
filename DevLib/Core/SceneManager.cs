@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Mobiversite.GameLib.DevLib.Core.SaveSystem;
+# if UNITY_EDITOR
 using UnityEditor;
+# endif
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
@@ -22,9 +24,12 @@ namespace Mobiversite.GameLib.DevLib.Core
     public struct SceneDefinition
     {
         public string LevelName;
+#if UNITY_EDITOR
         public SceneAsset Scene;
+#endif
         public SceneType SceneType;
     }
+
     public class SceneManager : MonoBehaviour
     {
         public static SceneManager Instance;
@@ -81,6 +86,7 @@ namespace Mobiversite.GameLib.DevLib.Core
 
         public void LoadScenesToList()
         {
+#if UNITY_EDITOR
 
             List<EditorBuildSettingsScene> editorBuildSettingsScenes = new List<EditorBuildSettingsScene>();
             NavigableScenes.Clear();
@@ -105,7 +111,7 @@ namespace Mobiversite.GameLib.DevLib.Core
             EditorBuildSettings.scenes = editorBuildSettingsScenes.ToArray();
 
             EditorUtility.SetDirty(this);
-
+#endif
         }
         public SceneDefinition GetCurrentSceneDefinition()
         {

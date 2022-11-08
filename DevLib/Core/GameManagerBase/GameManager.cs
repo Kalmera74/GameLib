@@ -21,7 +21,8 @@ namespace Mobiversite.GameLib.DevLib.Core.GameManagerBase
         private IGameState _state;
         private IOperationMode _operationMode;
         public static GameManager Instance;
-        [SerializeField] private bool IsUniversal = false;
+        [SerializeField] private bool IsUniversal = true;
+        [SerializeField] private bool InitializeWithFirstElements = true;
         [SerializeField] private List<Object> OperationModes = new List<Object>();
         [SerializeField] private List<Object> States = new List<Object>();
 
@@ -38,6 +39,12 @@ namespace Mobiversite.GameLib.DevLib.Core.GameManagerBase
             else
             {
                 DestroyImmediate(gameObject);
+            }
+
+            if (InitializeWithFirstElements && (States.Count > 0 && _state is null) && (OperationModes.Count > 0 && _operationMode is null))
+            {
+                SetOperationMode(OperationModes[0] as IOperationMode);
+                SetState(States[0] as IGameState);
             }
         }
 
