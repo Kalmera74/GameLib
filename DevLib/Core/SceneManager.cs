@@ -196,7 +196,7 @@ namespace Mobiversite.GameLib.DevLib.Core
             OnAfterLevelLoaded?.Invoke();
         }
 
-        public void LoadNextLevel(LoadSceneMode loadMode = LoadSceneMode.Single)
+        public void LoadNextLevel(LoadSceneMode loadMode)
         {
             int nextSceneIndex = ConvertFromScenesToNavigableIndex(CurrentlyLoadedSceneIndex) + 1;
 
@@ -207,7 +207,7 @@ namespace Mobiversite.GameLib.DevLib.Core
             nextSceneIndex = ConvertFromNavigableToScenesIndex(nextSceneIndex);
             LoadSceneAt(nextSceneIndex, loadMode);
         }
-        public void LoadPreviousLevel(LoadSceneMode loadMode = LoadSceneMode.Single)
+        public void LoadPreviousLevel(LoadSceneMode loadMode)
         {
             int previousSceneIndex = ConvertFromScenesToNavigableIndex(CurrentlyLoadedSceneIndex) - 1;
             if (previousSceneIndex < 0)
@@ -216,6 +216,28 @@ namespace Mobiversite.GameLib.DevLib.Core
             }
             previousSceneIndex = ConvertFromNavigableToScenesIndex(previousSceneIndex);
             LoadSceneAt(previousSceneIndex, loadMode);
+        }
+
+        public void LoadNextLevel()
+        {
+            int nextSceneIndex = ConvertFromScenesToNavigableIndex(CurrentlyLoadedSceneIndex) + 1;
+
+            if (nextSceneIndex >= TotalLoadableSceneCount)
+            {
+                nextSceneIndex = 0;
+            }
+            nextSceneIndex = ConvertFromNavigableToScenesIndex(nextSceneIndex);
+            LoadSceneAt(nextSceneIndex, LoadSceneMode.Single);
+        }
+        public void LoadPreviousLevel()
+        {
+            int previousSceneIndex = ConvertFromScenesToNavigableIndex(CurrentlyLoadedSceneIndex) - 1;
+            if (previousSceneIndex < 0)
+            {
+                previousSceneIndex = NavigableScenes.Count - 1;
+            }
+            previousSceneIndex = ConvertFromNavigableToScenesIndex(previousSceneIndex);
+            LoadSceneAt(previousSceneIndex, LoadSceneMode.Single);
         }
         public void ReloadCurrentScene(LoadSceneMode loadMode = LoadSceneMode.Single)
         {
