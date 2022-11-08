@@ -63,7 +63,7 @@ namespace Mobiversite.GameLib.DevLib.Core.GameManagerBase
 
         }
 
-        private void AddToStates(IGameState state)
+        public void AddToStates(IGameState state)
         {
             var upCastedState = (Object)state;
             if (!States.Contains(upCastedState))
@@ -72,7 +72,7 @@ namespace Mobiversite.GameLib.DevLib.Core.GameManagerBase
             }
         }
 
-        private void AddToModes(IOperationMode mode)
+        public void AddToModes(IOperationMode mode)
         {
             var upCastedMode = (Object)mode;
             if (!OperationModes.Contains(upCastedMode))
