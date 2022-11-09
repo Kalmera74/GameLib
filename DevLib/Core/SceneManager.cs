@@ -243,6 +243,10 @@ namespace Mobiversite.GameLib.DevLib.Core
         {
             LoadSceneAt(CurrentlyLoadedSceneIndex, loadMode);
         }
+        public void ReloadCurrentScene()
+        {
+            LoadSceneAt(CurrentlyLoadedSceneIndex, LoadSceneMode.Single);
+        }
 
         public void LoadLastSavedLevel()
         {
