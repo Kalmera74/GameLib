@@ -6,7 +6,7 @@ namespace Mobiversite.GameLib.DevLib.Utility
 {
     public static class Extensions
     {
-        public static T GetRandomElement<T>(this List<T> list)
+        public static T RandomElement<T>(this List<T> list)
         {
             var randomIndex = Random.Range(0, list.Count - 1);
             return list[randomIndex];

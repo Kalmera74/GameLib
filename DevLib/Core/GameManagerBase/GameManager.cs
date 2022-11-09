@@ -7,14 +7,6 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 namespace Mobiversite.GameLib.DevLib.Core.GameManagerBase
 {
-    public enum OperationMode
-    {
-        Update,
-        LateUpdate,
-        FixedUpdate,
-        OnTrigger,
-        AtInterval
-    }
     public class GameManager : MonoBehaviour
     {
 
@@ -25,6 +17,11 @@ namespace Mobiversite.GameLib.DevLib.Core.GameManagerBase
         [SerializeField] private bool InitializeWithFirstElements = true;
         [SerializeField] private List<Object> OperationModes = new List<Object>();
         [SerializeField] private List<Object> States = new List<Object>();
+
+        public event Action OnBeforeStateChanged;
+        public event Action OnAfterStateChanged;
+        public event Action OnBeforeModeChanged;
+        public event Action OnAfterModeChange;
 
         void Awake()
         {
@@ -59,14 +56,17 @@ namespace Mobiversite.GameLib.DevLib.Core.GameManagerBase
 
         public void SetState(IGameState state)
         {
+            OnBeforeStateChanged?.Invoke();
+
             _state = state;
             AddToStates(state);
             if (_operationMode is null)
             {
                 throw new System.ArgumentNullException("Operation Mode cannot be null. Set the Operation Mode before you set the State");
             }
-
             _operationMode.Operate(_state);
+
+            OnAfterStateChanged?.Invoke();
 
         }
 
@@ -100,8 +100,12 @@ namespace Mobiversite.GameLib.DevLib.Core.GameManagerBase
         }
         public void SetOperationMode(IOperationMode mode)
         {
+            OnBeforeModeChanged?.Invoke();
+
             AddToModes(mode);
             _operationMode = mode;
+
+            OnAfterModeChange?.Invoke();
         }
 
         public void SwitchStateTo(Type stateType)
