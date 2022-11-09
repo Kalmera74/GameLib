@@ -23,7 +23,7 @@ namespace Mobiversite.GameLib.DevLib.Utility
         public static void ResetTransform(this Transform trans)
         {
             trans.localPosition = Vector3.zero;
-            trans.localScale = Vector3.zero;
+            trans.localScale = Vector3.one;
             trans.localRotation = Quaternion.Euler(Vector3.zero);
         }
     }

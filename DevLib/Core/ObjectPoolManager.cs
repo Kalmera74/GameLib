@@ -25,11 +25,38 @@ namespace Mobiversite.GameLib.DevLib.Core
 
         public static ObjectPoolManager Instance;
 
+
         private void Awake()
         {
             FillList();
-            Instance = this;
+            if (Instance is null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+
+                DestroyImmediate(gameObject);
+            }
         }
+        void Start()
+        {
+            SceneManager.Instance.OnBeforeSceneLoaded += ReclaimObjects;
+        }
+
+        private void ReclaimObjects()
+        {
+            foreach (var item in _pool)
+            {
+                var items = item.Value.Objects;
+                foreach (var obj in items)
+                {
+                    Destroy(obj);
+                }
+            }
+        }
+
         private void FillList()
         {
             foreach (var item in ObjectPool)
@@ -65,8 +92,13 @@ namespace Mobiversite.GameLib.DevLib.Core
         }
         public void Destroy(GameObject obj)
         {
-            obj.transform.SetParent(null);
+            obj.transform.SetParent(transform);
             obj.SetActive(false);
+        }
+        public GameObject Spawn(GameObject objectToClone, bool isActive = true)
+        {
+
+            return Spawn(objectToClone, Vector3.zero, Quaternion.identity, isActive);
         }
         public GameObject Spawn(GameObject objectToClone, Vector3 spawnPosition, Quaternion rotation, bool isActive = true)
         {
