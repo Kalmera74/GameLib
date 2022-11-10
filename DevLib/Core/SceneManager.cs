@@ -253,5 +253,10 @@ namespace Mobiversite.GameLib.DevLib.Core
             var lastLoadedLevelIndex = SaveManager.Instance.GetLastLoadedScene();
             LoadSceneAt(lastLoadedLevelIndex);
         }
+
+        public int GetCurrentNavigableLevelNumber()
+        {
+            return ConvertFromScenesToNavigableIndex(CurrentlyLoadedSceneIndex) + 1;
+        }
     }
 }

@@ -39,10 +39,21 @@ namespace Mobiversite.GameLib.DevLib.Core
             LoadOrCreateSaveData();
         }
 
+        public int GetCurrencyAmount()
+        {
+            return _data.CurrencyAmount;
+        }
+        public void SaveCurrencyAmount(int currencyAmount)
+        {
+            _data.CurrencyAmount = currencyAmount;
+            Save();
+        }
+
+
         public void SaveLastPlayedScene(int sceneIndex)
         {
             _data.LastPlayedLevel = sceneIndex;
-            _saver.Save(_data);
+            Save();
         }
         public int GetLastLoadedScene()
         {
@@ -56,8 +67,13 @@ namespace Mobiversite.GameLib.DevLib.Core
             if (_data is null)
             {
                 _data = new SaveDataObject();
-
+                Save();
             }
         }
+        private void Save()
+        {
+            _saver.Save(_data);
+        }
+
     }
 }
