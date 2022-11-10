@@ -18,6 +18,7 @@ namespace Mobiversite.GameLib.DevLib.Core
             float b = Random.Range(0f, 1f);
 
             return new Color(r, g, b, 1f);
+            
         }
 
         public static void ResetTransform(this Transform trans)
