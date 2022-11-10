@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
-namespace Mobiversite.GameLib.DevLib.UI
+namespace Mobiversite.GameLib.DevLib.Core
 {
     public class MainCanvasManager : MonoBehaviour
     {
@@ -36,6 +36,6 @@ namespace Mobiversite.GameLib.DevLib.UI
             }
         }
 
-       
+
     }
 }

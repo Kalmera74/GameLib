@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEditor;
 
-namespace Mobiversite.GameLib.DevLib.Utility
+namespace Mobiversite.GameLib.DevLib.Core
 {
     [Serializable]
     public enum Modifier
@@ -67,7 +67,7 @@ namespace Mobiversite.GameLib.DevLib.Utility
         void Start()
         {
             ConvertListToDictionary();
-            
+
         }
 
         void OnGUI()

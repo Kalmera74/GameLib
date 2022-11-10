@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mobiversite.GameLib.DevLib.Utility
+namespace Mobiversite.GameLib.DevLib.Core
 {
     public static class Extensions
     {

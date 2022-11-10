@@ -1,11 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Mobiversite.GameLib.DevLib.Core.GameManagerBase.Modes;
-using Mobiversite.GameLib.DevLib.Core.GameManagerBase.States;
+using Mobiversite.GameLib.DevLib.Core;
 using UnityEngine;
 using Object = UnityEngine.Object;
-namespace Mobiversite.GameLib.DevLib.Core.GameManagerBase
+namespace Mobiversite.GameLib.DevLib.Core
 {
     public class GameManager : MonoBehaviour
     {

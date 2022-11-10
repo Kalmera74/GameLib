@@ -1,7 +1,7 @@
-using Mobiversite.GameLib.DevLib.Core.GameManagerBase.States;
+using Mobiversite.GameLib.DevLib.Core;
 using UnityEngine;
 
-namespace Mobiversite.GameLib.DevLib.Core.GameManagerBase.Modes
+namespace Mobiversite.GameLib.DevLib.Core
 {
     public class UpdateMode : MonoBehaviour, IOperationMode
     {

@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace Mobiversite.GameLib.DevLib.Core.SaveSystem
+namespace Mobiversite.GameLib.DevLib.Core
 {
     public interface ILoader
     {

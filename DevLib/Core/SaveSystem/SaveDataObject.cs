@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mobiversite.GameLib.DevLib.Core.SaveSystem
+namespace Mobiversite.GameLib.DevLib.Core
 {
     public class SaveDataObject
     {

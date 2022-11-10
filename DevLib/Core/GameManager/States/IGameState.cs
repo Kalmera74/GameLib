@@ -1,4 +1,4 @@
-namespace Mobiversite.GameLib.DevLib.Core.GameManagerBase.States
+namespace Mobiversite.GameLib.DevLib.Core
 {
     public interface IGameState
     {
