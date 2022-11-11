@@ -148,9 +148,7 @@ namespace Mobiversite.GameLib.DevLib.Core
         {
             OnBeforeSceneLoaded?.Invoke();
 
-            var asyncHandler = UnitySceneManager.LoadSceneAsync(sceneIndex, loadMode);
-
-            asyncHandler.completed += SceneAsyncLoaded;
+            var asyncHandler = UnitySceneManager.LoadSceneAsync(sceneIndex, loadMode);   
 
             while (!asyncHandler.isDone)
             {
@@ -160,6 +158,7 @@ namespace Mobiversite.GameLib.DevLib.Core
 
             CurrentlyLoadedSceneIndex = sceneIndex;
             SaveLastLoadedNavigableScene();
+            OnAfterLevelLoaded?.Invoke();
 
         }
 
@@ -190,11 +189,7 @@ namespace Mobiversite.GameLib.DevLib.Core
                 convertedIndex = 1;
             }
             return convertedIndex;
-        }
-        private void SceneAsyncLoaded(AsyncOperation operation)
-        {
-            OnAfterLevelLoaded?.Invoke();
-        }
+        }      
 
         public void LoadNextLevel(LoadSceneMode loadMode)
         {
