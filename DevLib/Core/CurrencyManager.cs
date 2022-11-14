@@ -25,11 +25,12 @@ namespace Mobiversite.GameLib.DevLib.Core
             {
                 DestroyImmediate(gameObject);
             }
+            CurrencyAmount = SaveManager.Instance.GetCurrencyAmount();
         }
         void Start()
         {
-            CurrencyAmount = SaveManager.Instance.GetCurrencyAmount();
-            
+
+
         }
 
         public int GetCurrentAmountOfCurrency()

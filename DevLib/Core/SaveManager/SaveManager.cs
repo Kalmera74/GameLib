@@ -75,5 +75,14 @@ namespace Mobiversite.GameLib.DevLib.Core
             _saver.Save(_data);
         }
 
+        public bool GetIsMute()
+        {
+            return _data.IsMuted;
+        }
+
+        public float GetVolume()
+        {
+            return _data.Volume;
+        }
     }
 }

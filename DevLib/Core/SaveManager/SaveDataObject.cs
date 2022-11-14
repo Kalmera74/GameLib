@@ -8,5 +8,8 @@ namespace Mobiversite.GameLib.DevLib.Core
     {
         public int LastPlayedLevel = -1;
         public int CurrencyAmount = 0;
+
+        public bool IsMuted = false;
+        public float Volume = 1f;
     }
 }
