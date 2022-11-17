@@ -111,6 +111,8 @@ namespace Mobiversite.GameLib.DevLib.Core
             EditorBuildSettings.scenes = editorBuildSettingsScenes.ToArray();
 
             EditorUtility.SetDirty(this);
+            UnityEditor.SceneManagement.EditorSceneManager.SaveOpenScenes();
+
 #endif
         }
         public SceneDefinition GetCurrentSceneDefinition()
@@ -148,7 +150,7 @@ namespace Mobiversite.GameLib.DevLib.Core
         {
             OnBeforeSceneLoaded?.Invoke();
 
-            var asyncHandler = UnitySceneManager.LoadSceneAsync(sceneIndex, loadMode);   
+            var asyncHandler = UnitySceneManager.LoadSceneAsync(sceneIndex, loadMode);
 
             while (!asyncHandler.isDone)
             {
@@ -189,7 +191,7 @@ namespace Mobiversite.GameLib.DevLib.Core
                 convertedIndex = 1;
             }
             return convertedIndex;
-        }      
+        }
 
         public void LoadNextLevel(LoadSceneMode loadMode)
         {
@@ -252,6 +254,16 @@ namespace Mobiversite.GameLib.DevLib.Core
         public int GetCurrentNavigableLevelNumber()
         {
             return ConvertFromScenesToNavigableIndex(CurrentlyLoadedSceneIndex) + 1;
+        }
+
+        public void OverrideLevelNames()
+        {
+            for (int i = 0; i < NavigableScenes.Count; i++)
+            {
+                var navigableSceneDef = NavigableScenes[i];
+                navigableSceneDef.LevelName = $"Level {i + 1}";
+                NavigableScenes[i] = navigableSceneDef;
+            }
         }
     }
 }
