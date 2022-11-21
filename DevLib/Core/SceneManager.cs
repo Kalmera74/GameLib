@@ -119,6 +119,7 @@ namespace Mobiversite.GameLib.DevLib.Core
         {
             return Scenes[CurrentlyLoadedSceneIndex];
         }
+        
 
         public void LoadSceneAt(int sceneIndex, LoadSceneMode loadMode = LoadSceneMode.Single)
         {
@@ -255,15 +256,6 @@ namespace Mobiversite.GameLib.DevLib.Core
         {
             return ConvertFromScenesToNavigableIndex(CurrentlyLoadedSceneIndex) + 1;
         }
-
-        public void OverrideLevelNames()
-        {
-            for (int i = 0; i < NavigableScenes.Count; i++)
-            {
-                var navigableSceneDef = NavigableScenes[i];
-                navigableSceneDef.LevelName = $"Level {i + 1}";
-                NavigableScenes[i] = navigableSceneDef;
-            }
-        }
+       
     }
 }

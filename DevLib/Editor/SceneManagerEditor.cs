@@ -18,10 +18,7 @@ namespace Mobiversite
             {
                 _sceneManager.LoadScenesToList();
             }
-            if (GUILayout.Button("Override Level Names"))
-            {
-                _sceneManager.OverrideLevelNames();
-            }
+          
             base.OnInspectorGUI();
 
         }
