@@ -11,21 +11,34 @@ namespace Mobiversite.GameLib.DevLib.Settings
         public event Action OnSettingChanged;
         private float _volumeBeforeMuting;
 
+        public static SoundManager Instance;
+
         void Awake()
         {
+            if (Instance is null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                DestroyImmediate(gameObject);
+            }
+
             var isMuted = SaveManager.Instance.GetIsMute();
             AudioListener.pause = isMuted;
 
             var volume = SaveManager.Instance.GetVolume();
             SetVolume(volume);
         }
-        public void Mute()
+        public void SetMute(bool isMute)
         {
-            AudioListener.pause = true;
+            AudioListener.pause = isMute;
+            Save();
         }
-        public void UnMute()
+        public bool IsMute()
         {
-            AudioListener.pause = false;
+            return AudioListener.pause;
         }
         public void SetVolume(float t)
         {
@@ -35,8 +48,14 @@ namespace Mobiversite.GameLib.DevLib.Settings
             }
 
             AudioListener.volume = t;
+            Save();
         }
-
+        private void Save()
+        {
+            SaveManager.Instance.SaveIsMute(AudioListener.pause);
+            SaveManager.Instance.SaveVolume(AudioListener.volume);
+            FireEvent();
+        }
         private void FireEvent()
         {
             OnSettingChanged?.Invoke();

@@ -41,7 +41,6 @@ namespace Mobiversite.GameLib.DevLib.Core
         public event Action OnAfterLevelLoaded;
         public event Action<float> OnWhileLevelLoading;
 
-        [SerializeField] private LoadSceneMode BootSceneLoadingMode = LoadSceneMode.Single;
         [SerializeField] private SceneType[] ExcludeFromLevelNavigation;
         [SerializeField] private List<SceneDefinition> Scenes = new List<SceneDefinition>();
         [SerializeField] private List<SceneDefinition> NavigableScenes = new List<SceneDefinition>();
@@ -81,7 +80,7 @@ namespace Mobiversite.GameLib.DevLib.Core
                 SaveManager.Instance.SaveLastPlayedScene(lastPlayedLevel);
             }
             CurrentlyLoadedSceneIndex = MenuSceneIndex;
-            LoadSceneAt(MenuSceneIndex, BootSceneLoadingMode);
+            LoadMainMenu();
         }
 
         public void LoadScenesToList()
@@ -119,7 +118,7 @@ namespace Mobiversite.GameLib.DevLib.Core
         {
             return Scenes[CurrentlyLoadedSceneIndex];
         }
-        
+
 
         public void LoadSceneAt(int sceneIndex, LoadSceneMode loadMode = LoadSceneMode.Single)
         {
@@ -173,7 +172,7 @@ namespace Mobiversite.GameLib.DevLib.Core
             }
         }
 
-        private int ConvertFromScenesToNavigableIndex(int index)
+        public int ConvertFromScenesToNavigableIndex(int index)
         {
             var scene = Scenes[index];
             var convertedIndex = NavigableScenes.IndexOf(scene);
@@ -183,7 +182,7 @@ namespace Mobiversite.GameLib.DevLib.Core
             }
             return convertedIndex;
         }
-        private int ConvertFromNavigableToScenesIndex(int index)
+        public int ConvertFromNavigableToScenesIndex(int index)
         {
             var scene = NavigableScenes[index];
             var convertedIndex = Scenes.IndexOf(scene);
@@ -251,11 +250,18 @@ namespace Mobiversite.GameLib.DevLib.Core
             var lastLoadedLevelIndex = SaveManager.Instance.GetLastLoadedScene();
             LoadSceneAt(lastLoadedLevelIndex);
         }
-
+        public int GetTotalNavigableScenesCount()
+        {
+            return NavigableScenes.Count;
+        }
         public int GetCurrentNavigableLevelNumber()
         {
             return ConvertFromScenesToNavigableIndex(CurrentlyLoadedSceneIndex) + 1;
         }
-       
+
+        public void LoadMainMenu()
+        {
+            LoadSceneAt(MenuSceneIndex);
+        }
     }
 }

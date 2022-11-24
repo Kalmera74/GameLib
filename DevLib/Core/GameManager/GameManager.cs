@@ -91,6 +91,7 @@ namespace Mobiversite.GameLib.DevLib.Core
         {
             var upCastedState = (Object)state;
             States.Remove(upCastedState);
+            _operationMode.Operate(null);
         }
         public void RemoveMode(IOperationMode mode)
         {

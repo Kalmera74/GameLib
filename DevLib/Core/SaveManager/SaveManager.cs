@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mobiversite.Assets._Project.Scripts;
 using UnityEngine;
 
 namespace Mobiversite.GameLib.DevLib.Core
@@ -70,6 +71,11 @@ namespace Mobiversite.GameLib.DevLib.Core
                 Save();
             }
         }
+        public List<LevelStateDefinition> GetLevelStates()
+        {
+            return _data.LevelStates;
+
+        }
         private void Save()
         {
             _saver.Save(_data);
@@ -79,10 +85,31 @@ namespace Mobiversite.GameLib.DevLib.Core
         {
             return _data.IsMuted;
         }
-
+        public void SaveIsMute(bool isMuted)
+        {
+            _data.IsMuted = isMuted;
+            Save();
+        }
+        public void SaveVolume(float t)
+        {
+            _data.Volume = t;
+            Save();
+        }
         public float GetVolume()
         {
             return _data.Volume;
+        }
+
+        public void SaveLevelStates(List<LevelStateDefinition> states)
+        {
+            _data.LevelStates = states;
+            Save();
+        }
+
+        public void SaveCanVibrate(bool canVibrate)
+        {
+            _data.CanVibrate = canVibrate;
+            Save();
         }
     }
 }
