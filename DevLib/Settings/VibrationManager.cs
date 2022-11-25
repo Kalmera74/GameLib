@@ -5,6 +5,7 @@ using System.Linq;
 using Lofelt.NiceVibrations;
 using Mobiversite.GameLib.DevLib.Core;
 using UnityEngine;
+using static Lofelt.NiceVibrations.HapticPatterns;
 
 namespace Mobiversite.GameLib.DevLib.Settings
 {
@@ -34,7 +35,17 @@ namespace Mobiversite.GameLib.DevLib.Settings
             _canVibrate = canVibrate;
             Save();
         }
-        public void PlayHaptic(HapticPatterns.PresetType pattern)
+        //         Selection = 0,
+        // Success = 1,
+        // Warning = 2,
+        // Failure = 3,
+        // LightImpact = 4,
+        // MediumImpact = 5,
+        // HeavyImpact = 6,
+        // RigidImpact = 7,
+        // SoftImpact = 8,
+        // None = -1
+        public void PlayHaptic(PresetType pattern)
         {
 
             if (!_canVibrate)
@@ -44,10 +55,44 @@ namespace Mobiversite.GameLib.DevLib.Settings
             Play(pattern);
         }
 
+        public void PlaySelectionHaptic()
+        {
 
-
-
-        private void Play(HapticPatterns.PresetType pattern)
+            PlayHaptic(PresetType.Selection);
+        }
+        public void PlaySuccessHaptic()
+        {
+            PlayHaptic(PresetType.Success);
+        }
+        public void PlayWarningHaptic()
+        {
+            PlayHaptic(PresetType.Warning);
+        }
+        public void PlayFailure()
+        {
+            PlayHaptic(PresetType.Failure);
+        }
+        public void PlayLightImpact()
+        {
+            PlayHaptic(PresetType.LightImpact);
+        }
+        public void PlayMediumImpact()
+        {
+            PlayHaptic(PresetType.MediumImpact);
+        }
+        public void PlayHeavyImpact()
+        {
+            PlayHaptic(PresetType.HeavyImpact);
+        }
+        public void PlayRigidImpact()
+        {
+            PlayHaptic(PresetType.RigidImpact);
+        }
+        public void PlaySoftImpact()
+        {
+            PlayHaptic(PresetType.SoftImpact);
+        }
+        private void Play(PresetType pattern)
         {
 
             Source.fallbackPreset = pattern;

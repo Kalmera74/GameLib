@@ -92,8 +92,8 @@ namespace Mobiversite.GameLib.DevLib.Core
         }
         public void Destroy(GameObject obj)
         {
-            obj?.transform.SetParent(transform);
-            obj?.SetActive(false);
+            obj.transform.SetParent(transform);
+            obj.SetActive(false);
         }
         public GameObject Spawn(GameObject objectToClone, bool isActive = true)
         {
