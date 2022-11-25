@@ -8,6 +8,7 @@ namespace Mobiversite.GameLib.DevLib.Settings
 {
     public class SoundManager : MonoBehaviour
     {
+        [SerializeField] private AudioSource Audio;
         public event Action OnSettingChanged;
         private float _volumeBeforeMuting;
 
@@ -31,12 +32,17 @@ namespace Mobiversite.GameLib.DevLib.Settings
             var volume = SaveManager.Instance.GetVolume();
             SetVolume(volume);
         }
+        void Start()
+        {
+            bool isMute = SaveManager.Instance.GetIsMute();
+            AudioListener.pause = isMute;
+        }
         public void SetMute(bool isMute)
         {
             AudioListener.pause = isMute;
             Save();
         }
-        public bool IsMute()
+        public bool GetIsMute()
         {
             return AudioListener.pause;
         }
@@ -49,6 +55,11 @@ namespace Mobiversite.GameLib.DevLib.Settings
 
             AudioListener.volume = t;
             Save();
+        }
+        public void Play(AudioClip clip)
+        {
+            Audio.clip = clip;
+            Audio.Play();
         }
         private void Save()
         {

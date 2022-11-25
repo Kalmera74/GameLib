@@ -111,5 +111,9 @@ namespace Mobiversite.GameLib.DevLib.Core
             _data.CanVibrate = canVibrate;
             Save();
         }
+        public bool GetCanVibrate()
+        {
+            return _data.CanVibrate;
+        }
     }
 }
