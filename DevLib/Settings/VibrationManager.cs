@@ -32,7 +32,7 @@ namespace Mobiversite.GameLib.DevLib.Settings
         }
         void Start()
         {
-            _canVibrate = SaveManager.Instance.GetCanVibrate();
+            _canVibrate = SaveManager.Instance.GetVibrationState();
         }
         public void SetCanVibrate(bool canVibrate)
         {
@@ -100,7 +100,7 @@ namespace Mobiversite.GameLib.DevLib.Settings
 
         private void Save()
         {
-            SaveManager.Instance.SaveCanVibrate(_canVibrate);
+            SaveManager.Instance.SaveVibrationState(_canVibrate);
         }
     }
 }

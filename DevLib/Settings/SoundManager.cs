@@ -8,10 +8,11 @@ namespace Mobiversite.GameLib.DevLib.Settings
 {
     public class SoundManager : MonoBehaviour
     {
-        [SerializeField] private AudioSource Audio;
-        public event Action OnSettingChanged;
-        private float _volumeBeforeMuting;
+        [SerializeField] private AudioSource SFXAudioPlayer;
+        [SerializeField] private AudioSource MusicPlayer;
 
+        private bool _isSFXOn = false;
+        private bool _isMusicOn = false;
         public static SoundManager Instance;
 
         void Awake()
@@ -26,25 +27,38 @@ namespace Mobiversite.GameLib.DevLib.Settings
                 DestroyImmediate(gameObject);
             }
 
-            var isMuted = SaveManager.Instance.GetIsMute();
-            AudioListener.pause = isMuted;
+
+        }
+        void Start()
+        {
+            _isSFXOn = SaveManager.Instance.GetSFXState();
+            SFXAudioPlayer.mute = !_isSFXOn;
+
+            _isMusicOn = SaveManager.Instance.GetMusicMute();
+            MusicPlayer.mute = !_isMusicOn;
 
             var volume = SaveManager.Instance.GetVolume();
             SetVolume(volume);
         }
-        void Start()
+        public void SetSFXState(bool state)
         {
-            bool isMute = SaveManager.Instance.GetIsMute();
-            AudioListener.pause = isMute;
-        }
-        public void SetMute(bool isMute)
-        {
-            AudioListener.pause = isMute;
+            _isSFXOn = state;
+            SFXAudioPlayer.mute = !_isSFXOn;
             Save();
         }
-        public bool GetIsMute()
+        public void SetMusicState(bool state)
         {
-            return AudioListener.pause;
+            _isMusicOn = state;
+            MusicPlayer.mute = !_isMusicOn;
+            Save();
+        }
+        public bool GetIsSFXOn()
+        {
+            return _isSFXOn;
+        }
+        public bool GetIsMusicOn()
+        {
+            return _isMusicOn;
         }
         public void SetVolume(float t)
         {
@@ -56,21 +70,27 @@ namespace Mobiversite.GameLib.DevLib.Settings
             AudioListener.volume = t;
             Save();
         }
-        public void Play(AudioClip clip)
+        public float GetVolume()
         {
-            Audio.clip = clip;
-            Audio.Play();
+            return AudioListener.volume;
+        }
+        public void PlaySFX(AudioClip clip)
+        {
+            SFXAudioPlayer.clip = clip;
+            SFXAudioPlayer.Play();
+        }
+        public void PlayMusic(AudioClip clip)
+        {
+            MusicPlayer.clip = clip;
+            // TODO add fade-out,fade-in between old and new clip with settings
+            MusicPlayer.Play();
         }
         private void Save()
         {
-            SaveManager.Instance.SaveIsMute(AudioListener.pause);
+            SaveManager.Instance.SaveSFXState(_isSFXOn);
+            SaveManager.Instance.SaveMusicState(_isMusicOn);
             SaveManager.Instance.SaveVolume(AudioListener.volume);
-            FireEvent();
-        }
-        private void FireEvent()
-        {
-            OnSettingChanged?.Invoke();
-        }
 
+        }
     }
 }

@@ -40,26 +40,6 @@ namespace Mobiversite.GameLib.DevLib.Core
             LoadOrCreateSaveData();
         }
 
-        public int GetCurrencyAmount()
-        {
-            return _data.CurrencyAmount;
-        }
-        public void SaveCurrencyAmount(int currencyAmount)
-        {
-            _data.CurrencyAmount = currencyAmount;
-            Save();
-        }
-
-
-        public void SaveLastPlayedScene(int sceneIndex)
-        {
-            _data.LastPlayedLevel = sceneIndex;
-            Save();
-        }
-        public int GetLastLoadedScene()
-        {
-            return _data.LastPlayedLevel;
-        }
 
         private void LoadOrCreateSaveData()
         {
@@ -71,34 +51,42 @@ namespace Mobiversite.GameLib.DevLib.Core
                 Save();
             }
         }
+
         public List<LevelStateDefinition> GetLevelStates()
         {
             return _data.LevelStates;
 
         }
-        private void Save()
+        public int GetCurrencyAmount()
         {
-            _saver.Save(_data);
+            return _data.CurrencyAmount;
         }
 
-        public bool GetIsMute()
+        public int GetLastLoadedScene()
         {
-            return _data.IsMuted;
+            return _data.LastPlayedLevel;
         }
-        public void SaveIsMute(bool isMuted)
+
+        public bool GetSFXState()
         {
-            _data.IsMuted = isMuted;
-            Save();
+            return _data.IsSFXOn;
         }
-        public void SaveVolume(float t)
+
+        public bool GetMusicMute()
         {
-            _data.Volume = t;
-            Save();
+            return _data.IsMusicOn;
         }
+
         public float GetVolume()
         {
             return _data.Volume;
         }
+        public bool GetVibrationState()
+        {
+            return _data.CanVibrate;
+        }
+
+
 
         public void SaveLevelStates(List<LevelStateDefinition> states)
         {
@@ -106,14 +94,42 @@ namespace Mobiversite.GameLib.DevLib.Core
             Save();
         }
 
-        public void SaveCanVibrate(bool canVibrate)
+        public void SaveVibrationState(bool state)
         {
-            _data.CanVibrate = canVibrate;
+            _data.CanVibrate = state;
             Save();
         }
-        public bool GetCanVibrate()
+        public void SaveMusicState(bool state)
         {
-            return _data.CanVibrate;
+            _data.IsMusicOn = state;
+            Save();
+        }
+        public void SaveVolume(float t)
+        {
+            _data.Volume = t;
+            Save();
+        }
+        public void SaveSFXState(bool state)
+        {
+            _data.IsSFXOn = state;
+            Save();
+        }
+        public void SaveCurrencyAmount(int currencyAmount)
+        {
+            _data.CurrencyAmount = currencyAmount;
+            Save();
+        }
+
+        public void SaveLastPlayedScene(int sceneIndex)
+        {
+            _data.LastPlayedLevel = sceneIndex;
+            Save();
+        }
+
+
+        private void Save()
+        {
+            _saver.Save(_data);
         }
     }
 }

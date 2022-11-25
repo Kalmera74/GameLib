@@ -9,7 +9,8 @@ namespace Mobiversite.GameLib.DevLib.Core
     {
         public int LastPlayedLevel = -1;
         public int CurrencyAmount = 0;
-        public bool IsMuted = false;
+        public bool IsSFXOn = true;
+        public bool IsMusicOn = true;
         public float Volume = 1f;
         public bool CanVibrate = true;
         public List<LevelStateDefinition> LevelStates = new List<LevelStateDefinition>();
