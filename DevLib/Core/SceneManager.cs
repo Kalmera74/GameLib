@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Mobiversite.GameLib.DevLib.Core;
-# if UNITY_EDITOR
+using Mobiversite.GameLib.DevLib.Analytics;
+#if UNITY_EDITOR
 using UnityEditor;
 # endif
 using UnityEngine;
@@ -161,6 +161,7 @@ namespace Mobiversite.GameLib.DevLib.Core
             CurrentlyLoadedSceneIndex = sceneIndex;
             SaveLastLoadedNavigableScene();
             OnAfterLevelLoaded?.Invoke();
+            AnalyticsLogger.LogLevelLoadedEvent(CurrentlyLoadedSceneIndex);
 
         }
 
@@ -242,6 +243,7 @@ namespace Mobiversite.GameLib.DevLib.Core
         }
         public void ReloadCurrentScene()
         {
+            AnalyticsLogger.LogLevelRestartEvent(CurrentlyLoadedSceneIndex);
             LoadSceneAt(CurrentlyLoadedSceneIndex, LoadSceneMode.Single);
         }
 
