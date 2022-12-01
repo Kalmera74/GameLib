@@ -131,5 +131,37 @@ namespace Mobiversite.GameLib.DevLib.Core
         {
             _saver.Save(_data);
         }
+
+        public void SaveTapTutorialState(bool canPlayTapTutorial)
+        {
+            _data.CanPlayTapTutorial = canPlayTapTutorial;
+            Save();
+        }
+
+        public bool GetCanPlayTapTutorial()
+        {
+            return _data.CanPlayTapTutorial;
+        }
+
+        public bool GetCanPlaySliderTutorial()
+        {
+            return _data.CanPlaySliderTutorial;
+        }
+
+        public void SaveSliderTutorialState(bool canPlayTapTutorial)
+        {
+            _data.CanPlaySliderTutorial = canPlayTapTutorial;
+            Save();
+        }
+
+        public void SaveTapTwoTutorialState(bool canPlayTapTutorial)
+        {
+            _data.CanPlayTapTwoTutorial = canPlayTapTutorial;
+        }
+
+        public bool GetCanPlayTapTwoTutorial()
+        {
+            return _data.CanPlayTapTwoTutorial;
+        }
     }
 }

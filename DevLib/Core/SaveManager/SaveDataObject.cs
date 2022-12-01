@@ -13,6 +13,10 @@ namespace Mobiversite.GameLib.DevLib.Core
         public bool IsMusicOn = true;
         public float Volume = 1f;
         public bool CanVibrate = true;
+        public bool CanPlayTapTutorial = true;
+        public bool CanPlaySliderTutorial = true;
+        public bool CanPlayTapTwoTutorial = true;
         public List<LevelStateDefinition> LevelStates = new List<LevelStateDefinition>();
+
     }
 }
