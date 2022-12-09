@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Mobiversite
+namespace GameLib.Managers.GameManager.States
 {
     public abstract class GameState : MonoBehaviour
     {

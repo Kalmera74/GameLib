@@ -1,5 +1,6 @@
+using GameLib.ScriptableObjectBases.ObjectPooler;
 using UnityEngine;
-namespace Mobiversite
+namespace GameLib.Managers.ObjectPoolManager
 {
 
     public class ObjectPoolManager : MonoBehaviour

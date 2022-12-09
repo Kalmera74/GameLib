@@ -1,19 +1,20 @@
+using GameLib.ScriptableObjectBases.EventDelegates;
 using UnityEditor;
 using UnityEngine;
 
-namespace Mobiversite
+namespace GameLib.Editor
 {
 
-    [CustomEditor(typeof(EventDelegateSO<Object>), true)]
+    [CustomEditor(typeof(EventDelegateSO<object>), true)]
     public class ObjectEventDelegateEditor : Editor
     {
 
 
-        private Object _param;
-        private EventDelegateSO<Object> _delegate;
+        private object _param;
+        private EventDelegateSO<object> _delegate;
         private void OnEnable()
         {
-            _delegate = target as EventDelegateSO<Object>;
+            _delegate = target as EventDelegateSO<object>;
         }
         public override void OnInspectorGUI()
         {
@@ -22,7 +23,7 @@ namespace Mobiversite
             GUILayout.BeginHorizontal(GUILayout.MinWidth(0));
 
             GUILayout.Label("Parameter");
-            _param = EditorGUILayout.ObjectField("", _param, typeof(Object), true);
+            _param = EditorGUILayout.ObjectField("", _param, typeof(object), true);
             GUILayout.EndHorizontal();
 
             if (GUILayout.Button("Fire The Event"))

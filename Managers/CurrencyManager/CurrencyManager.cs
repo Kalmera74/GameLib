@@ -1,10 +1,12 @@
+using GameLib.ScriptableObjectBases.EventDelegates;
+using GameLib.ScriptableObjectBases.PrimitiveReferances;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace Mobiversite
+namespace GameLib.Managers.CurrencyManager
 {
     public class CurrencyManager : MonoBehaviour
     {

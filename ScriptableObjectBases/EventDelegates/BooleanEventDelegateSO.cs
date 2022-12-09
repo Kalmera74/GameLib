@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mobiversite
+namespace GameLib.ScriptableObjectBases.EventDelegates
 {
     [CreateAssetMenu(menuName = "Mobiversite/EventDelegates/Boolean Param Event Delegate", fileName = "Boolean_Delegate")]
     public class BooleanEventDelegateSO : EventDelegateSO<bool>

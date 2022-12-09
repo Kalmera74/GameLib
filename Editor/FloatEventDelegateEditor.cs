@@ -1,10 +1,11 @@
+using GameLib.ScriptableObjectBases.EventDelegates;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Mobiversite
+namespace GameLib.Editor
 {
 
     [CustomEditor(typeof(EventDelegateSO<float>), true)]
@@ -15,7 +16,7 @@ namespace Mobiversite
         private float _param;
         private EventDelegateSO<float> _delegate;
 
- private void OnEnable()
+        private void OnEnable()
         {
             _delegate = target as EventDelegateSO<float>;
         }

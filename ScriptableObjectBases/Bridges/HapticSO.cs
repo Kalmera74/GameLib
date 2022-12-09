@@ -1,8 +1,9 @@
+using GameLib.ScriptableObjectBases.EventDelegates;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mobiversite
+namespace GameLib.ScriptableObjectBases.Bridges
 {
     [CreateAssetMenu(menuName = "Mobiversite/Vibration/Default", fileName = "Haptic_Controller")]
     public class HapticSO : ScriptableObject

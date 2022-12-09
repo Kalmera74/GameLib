@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mobiversite.GameLib.DevLib.Camera
+namespace GameLib.Camera
 {
     public class OrthographicSizeFitter : MonoBehaviour
     {

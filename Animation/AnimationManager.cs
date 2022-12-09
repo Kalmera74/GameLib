@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mobiversite.GameLib.DevLib.Animations
+namespace GameLib.Animation
 {
     public class AnimationManager : MonoBehaviour
     {

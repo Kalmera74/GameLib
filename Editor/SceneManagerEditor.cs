@@ -1,9 +1,10 @@
+using GameLib.Managers.SceneManager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Mobiversite
+namespace GameLib.Editor
 {
 
     [InitializeOnLoad]

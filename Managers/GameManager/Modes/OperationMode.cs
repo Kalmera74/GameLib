@@ -1,8 +1,7 @@
-
-
+using GameLib.Managers.GameManager.States;
 using UnityEngine;
 
-namespace Mobiversite
+namespace GameLib.Managers.GameManager.Modes
 {
     public abstract class OperationMode : MonoBehaviour
     {

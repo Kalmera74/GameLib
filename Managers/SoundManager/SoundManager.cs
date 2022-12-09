@@ -1,10 +1,11 @@
+using GameLib.ScriptableObjectBases.EventDelegates;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Mobiversite
+namespace GameLib.Managers.SoundManager
 {
     public class SoundManager : MonoBehaviour
     {

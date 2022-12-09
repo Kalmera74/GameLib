@@ -25,6 +25,12 @@
 # Visual Studio Code Settings 
 .vscode/
 
+# Dotnet obj directory
+.obj/
+
+# Dotnet bin directory
+.bin/
+
 # Gradle cache directory
 .gradle/
 

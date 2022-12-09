@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mobiversite
+namespace GameLib.ScriptableObjectBases.EventDelegates
 {
     public abstract class EventDelegateSO<T> : ScriptableObject
     {

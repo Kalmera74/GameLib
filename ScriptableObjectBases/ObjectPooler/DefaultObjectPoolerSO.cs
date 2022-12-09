@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mobiversite
+namespace GameLib.ScriptableObjectBases.ObjectPooler
 {
 
     [CreateAssetMenu(menuName = "Mobiversite/Data Containers/ObjectPooling", fileName = "Object_Pool_Container")]

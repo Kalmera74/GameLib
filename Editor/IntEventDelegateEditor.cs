@@ -1,10 +1,11 @@
+using GameLib.ScriptableObjectBases.EventDelegates;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Mobiversite
+namespace GameLib.Editor
 {
 
     [CustomEditor(typeof(EventDelegateSO<int>), true)]
@@ -31,7 +32,7 @@ namespace Mobiversite
             if (GUILayout.Button("Fire The Event"))
             {
 
-                _param = Int32.Parse(_textFieldValue);
+                _param = int.Parse(_textFieldValue);
                 _delegate?.FireEvent(_param);
 
             }

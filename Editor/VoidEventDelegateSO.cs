@@ -1,10 +1,11 @@
+using GameLib.ScriptableObjectBases.EventDelegates;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Mobiversite
+namespace GameLib.Editor
 {
 
     [CustomEditor(typeof(VoidEventDelegateSO), true)]

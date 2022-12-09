@@ -1,3 +1,4 @@
+using GameLib.ScriptableObjectBases.EventDelegates;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace Mobiversite
+namespace GameLib.Managers.SceneManager
 {
     [Serializable]
     public class DefaultSceneManager : SceneManager<SceneDefinition>

@@ -1,7 +1,8 @@
+using GameLib.Managers.GameManager.States;
 using Mobiversite.GameLib.DevLib.Core;
 using UnityEngine;
 
-namespace Mobiversite
+namespace GameLib.Managers.GameManager.Modes
 {
     public class UpdateMode : OperationMode
     {

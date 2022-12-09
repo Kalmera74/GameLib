@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mobiversite
+namespace GameLib.ScriptableObjectBases.ObjectPooler
 {
 
     public abstract class ObjectPoolerSO<T> : ScriptableObject

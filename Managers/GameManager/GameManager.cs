@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Mobiversite.GameLib.DevLib.Core;
+using GameLib.Managers.GameManager.Modes;
+using GameLib.Managers.GameManager.States;
+using GameLib.ScriptableObjectBases.EventDelegates;
 using UnityEngine;
 using Object = UnityEngine.Object;
-namespace Mobiversite.GameLib.DevLib.Core
+namespace GameLib.Managers.GameManager
 {
     public class GameManager : MonoBehaviour
     {
@@ -36,7 +38,7 @@ namespace Mobiversite.GameLib.DevLib.Core
         {
             if (OperationMode is null)
             {
-                throw new System.ArgumentNullException("Operation Mode cannot be null. Set the Operation Mode before you set the State");
+                throw new ArgumentNullException("Operation Mode cannot be null. Set the Operation Mode before you set the State");
             }
 
             OnBeforeStateChangedEvent.FireEvent();

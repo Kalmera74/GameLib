@@ -1,3 +1,6 @@
+using GameLib.ScriptableObjectBases.EventDelegates;
+using GameLib.ScriptableObjectBases.PrimitiveReferances;
+using GameLib.ScriptableObjectBases.SceneCollection;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +9,7 @@ using UnityEditor;
 #endif
 using UnityEngine;
 
-namespace Mobiversite
+namespace GameLib.Managers.SceneManager
 {
     [Serializable]
     public struct SceneDefinition

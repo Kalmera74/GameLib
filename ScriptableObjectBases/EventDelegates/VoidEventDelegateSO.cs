@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mobiversite
+namespace GameLib.ScriptableObjectBases.EventDelegates
 {
     [CreateAssetMenu(menuName = "Mobiversite/EventDelegates/Void Event Delegate", fileName = "Void_Delegate")]
     public class VoidEventDelegateSO : ScriptableObject
-    {       
+    {
 
         private event Action _voidEvent;
 

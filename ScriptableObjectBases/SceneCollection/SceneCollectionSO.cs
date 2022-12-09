@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
-namespace Mobiversite
+namespace GameLib.ScriptableObjectBases.SceneCollection
 {
     public abstract class SceneCollectionSO<T> : ScriptableObject
     {

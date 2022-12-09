@@ -1,7 +1,9 @@
+using GameLib.Managers.GameManager.States;
+using GameLib.ScriptableObjectBases.EventDelegates;
 using UnityEditor;
 using UnityEngine;
 
-namespace Mobiversite
+namespace GameLib.Editor
 {
 
     [CustomEditor(typeof(EventDelegateSO<GameState>), true)]
@@ -9,7 +11,7 @@ namespace Mobiversite
     {
 
 
-        private Object _param;
+        private object _param;
         private EventDelegateSO<GameState> _delegate;
         private void OnEnable()
         {

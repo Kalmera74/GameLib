@@ -1,7 +1,8 @@
-
+using GameLib.Managers.GameManager.Modes;
+using GameLib.ScriptableObjectBases.EventDelegates;
 using UnityEditor;
 using UnityEngine;
-namespace Mobiversite
+namespace GameLib.Editor
 {
 
     [CustomEditor(typeof(EventDelegateSO<OperationMode>), true)]
@@ -9,7 +10,7 @@ namespace Mobiversite
     {
 
 
-        private Object _param;
+        private object _param;
         private EventDelegateSO<OperationMode> _delegate;
         private void OnEnable()
         {

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mobiversite
+namespace GameLib.ScriptableObjectBases.EventDelegates
 {
     [CreateAssetMenu(menuName = "Mobiversite/EventDelegates/Object Param Event Delegate", fileName = "Object_Delegate")]
-    public class ObjectEventDelegateSO : EventDelegateSO<Object>
+    public class ObjectEventDelegateSO : EventDelegateSO<object>
     {
     }
 }

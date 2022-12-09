@@ -6,8 +6,9 @@ using Lofelt.NiceVibrations;
 using static Lofelt.NiceVibrations.HapticPatterns;
 
 using UnityEngine;
+using GameLib.ScriptableObjectBases.EventDelegates;
 
-namespace Mobiversite
+namespace GameLib.Managers.VibrationManager
 {
 
     public class VibrationManager : MonoBehaviour
