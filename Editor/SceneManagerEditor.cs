@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace GameLib.Editor
+namespace GameLib.EditorScripts
 {
 
     [InitializeOnLoad]

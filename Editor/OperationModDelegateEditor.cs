@@ -2,7 +2,7 @@ using GameLib.Managers.GameManager.Modes;
 using GameLib.ScriptableObjectBases.EventDelegates;
 using UnityEditor;
 using UnityEngine;
-namespace GameLib.Editor
+namespace GameLib.EditorScripts
 {
 
     [CustomEditor(typeof(EventDelegateSO<OperationMode>), true)]
