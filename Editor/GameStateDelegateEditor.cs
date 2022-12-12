@@ -2,6 +2,7 @@ using GameLib.Managers.GameManager.States;
 using GameLib.ScriptableObjectBases.EventDelegates;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace GameLib.EditorScripts
 {
@@ -11,7 +12,7 @@ namespace GameLib.EditorScripts
     {
 
 
-        private object _param;
+        private Object _param;
         private EventDelegateSO<GameState> _delegate;
         private void OnEnable()
         {
