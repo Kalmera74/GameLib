@@ -7,7 +7,7 @@ namespace GameLib.ScriptableObjectBases.SaverLoader
     [CreateAssetMenu(menuName = "Mobiversite/SaveManager/Saver/Default", fileName = "Default_Saver")]
     public class SaverSO : ScriptableObject, ISaver
     {
-        [SerializeField] private readonly SaveListSO SaveList;
+        [SerializeField] private SaveListSO SaveList;
         public void Save()
         {
             var saveables = SaveList.GetSaveables();
