@@ -1,7 +1,8 @@
 ﻿using GameLib.Managers.SaveManager;
 using System.Collections;
-using System.Text.Json.Nodes;
+using Newtonsoft.Json;
 using UnityEngine;
+using Newtonsoft.Json.Linq;
 
 namespace GameLib.ScriptableObjectBases.SaverLoader
 {
@@ -15,7 +16,10 @@ namespace GameLib.ScriptableObjectBases.SaverLoader
 
             string savedData = PlayerPrefs.GetString("saveData");
 
-            JsonArray jsonList = JsonValue.Parse(savedData) as JsonArray;
+            //  JsonArray jsonList = JsonValue.Parse(savedData) as JsonArray;
+            
+            var jsonList = JArray.Parse(savedData);
+           
 
             int length = jsonList.Count;
 
