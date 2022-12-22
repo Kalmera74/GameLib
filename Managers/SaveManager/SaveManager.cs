@@ -27,8 +27,8 @@ namespace GameLib.Managers.SaveManager
             _saver = (ISaver)Saver;
             _loader = (ILoader)Loader;
 
-            SaveRequestDelegate.Subscribe(Save);
-            LoadRequestDelegate.Subscribe(Load);
+            SaveRequestDelegate?.Subscribe(Save);
+            LoadRequestDelegate?.Subscribe(Load);
             
 
         }
@@ -39,22 +39,22 @@ namespace GameLib.Managers.SaveManager
 
         private void Save()
         {
-            OnBeforeSaveEventDelegate.FireEvent();
-            _saver.Save();
-            OnAfterSaveEventDelegate.FireEvent();
+            OnBeforeSaveEventDelegate?.FireEvent();
+            _saver?.Save();
+            OnAfterSaveEventDelegate?.FireEvent();
 
         }
         private void Load()
         {
-            OnBeforeLoadingEventDelegate.FireEvent();
-            _loader.Load();
-            OnAfterLoadingEventDelegate.FireEvent();
+            OnBeforeLoadingEventDelegate?.FireEvent();
+            _loader?.Load();
+            OnAfterLoadingEventDelegate?.FireEvent();
         }
 
        void OnDestroy()
         {
-            SaveRequestDelegate.UnSubscribe(Save);
-            LoadRequestDelegate.UnSubscribe(Load);
+            SaveRequestDelegate?.UnSubscribe(Save);
+            LoadRequestDelegate?.UnSubscribe(Load);
         }
 
       

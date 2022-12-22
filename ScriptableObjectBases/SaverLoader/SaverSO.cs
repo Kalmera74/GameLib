@@ -12,7 +12,7 @@ namespace GameLib.ScriptableObjectBases.SaverLoader
         {
             var saveables = SaveList.GetSaveables();
             var length = saveables.Length;
-            const string jsonHead = "items:[";
+            const string jsonHead = "[";
             const string jsonTail = "]";
             string json = jsonHead;
 
@@ -21,12 +21,12 @@ namespace GameLib.ScriptableObjectBases.SaverLoader
             {
                 SaveableSO saveable = saveables[i];
 
-                string serializedSaveableSO = $"{{ {saveable.Serialize()} }},";
+                string serializedSaveableSO = $"{saveable.Serialize()},";
                 json += serializedSaveableSO;
             }
 
             json += jsonTail;
-
+            Debug.Log($"!!! {json}");
             PlayerPrefs.SetString("saveData", json);
             PlayerPrefs.Save();
 

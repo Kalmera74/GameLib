@@ -10,7 +10,7 @@ namespace GameLib.ScriptableObjectBases.SaverLoader.Saveables
 
         public override void Deserialize(string data)
         {
-            JsonUtility.FromJsonOverwrite(data,this);
+            JsonUtility.FromJsonOverwrite(data, this);
         }
 
         public override string Serialize()

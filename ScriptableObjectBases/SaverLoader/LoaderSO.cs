@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace GameLib.ScriptableObjectBases.SaverLoader
 {
-    [CreateAssetMenu(menuName = "Mobiversite/SaveManager/Loader/Default", fileName ="Default_Loader")]
+    [CreateAssetMenu(menuName = "Mobiversite/SaveManager/Loader/Default", fileName = "Default_Loader")]
     public class LoaderSO : ScriptableObject, ILoader
     {
         [SerializeField] private SaveListSO SaveList;
@@ -17,10 +17,14 @@ namespace GameLib.ScriptableObjectBases.SaverLoader
 
             string savedData = PlayerPrefs.GetString("saveData");
 
+            if (string.IsNullOrEmpty(savedData))
+            {
+                return;
+            }
             //  JsonArray jsonList = JsonValue.Parse(savedData) as JsonArray;
-            
+
             var jsonList = JArray.Parse(savedData);
-           
+
 
             int length = jsonList.Count;
 

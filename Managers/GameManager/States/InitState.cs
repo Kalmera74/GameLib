@@ -6,7 +6,7 @@ namespace GameLib.Managers.GameManager.States
     {
         public override void Execute()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }
