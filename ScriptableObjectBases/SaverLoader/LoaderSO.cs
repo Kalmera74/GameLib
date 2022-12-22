@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace GameLib.ScriptableObjectBases.SaverLoader
 {
+    [CreateAssetMenu(menuName = "Mobiversite/SaveManager/Loader/Default", fileName ="Default_Loader")]
     public class LoaderSO : ScriptableObject, ILoader
     {
         [SerializeField] private SaveListSO SaveList;
