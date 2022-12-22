@@ -10,17 +10,17 @@ namespace GameLib.Managers.SaveManager
         private ISaver _saver;
         private ILoader _loader;
 
-        [SerializeField] private readonly Object Saver;
-        [SerializeField] private readonly Object Loader;
+        [SerializeField] private  Object Saver;
+        [SerializeField] private  Object Loader;
 
-        [SerializeField] private readonly VoidEventDelegateSO SaveRequestDelegate;
-        [SerializeField] private readonly VoidEventDelegateSO LoadRequestDelegate;
+        [SerializeField] private  VoidEventDelegateSO SaveRequestDelegate;
+        [SerializeField] private  VoidEventDelegateSO LoadRequestDelegate;
 
-        [SerializeField] private readonly VoidEventDelegateSO OnBeforeSaveEventDelegate;
-        [SerializeField] private readonly VoidEventDelegateSO OnAfterSaveEventDelegate;
+        [SerializeField] private  VoidEventDelegateSO OnBeforeSaveEventDelegate;
+        [SerializeField] private  VoidEventDelegateSO OnAfterSaveEventDelegate;
 
-        [SerializeField] private readonly VoidEventDelegateSO OnBeforeLoadingEventDelegate;
-        [SerializeField] private readonly VoidEventDelegateSO OnAfterLoadingEventDelegate;
+        [SerializeField] private  VoidEventDelegateSO OnBeforeLoadingEventDelegate;
+        [SerializeField] private  VoidEventDelegateSO OnAfterLoadingEventDelegate;
 
         void Awake()
         {
