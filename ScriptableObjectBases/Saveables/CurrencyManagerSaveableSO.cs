@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace GameLib.ScriptableObjectBases.Saveables
 {
-    [CreateAssetMenu(menuName = "Mobiversite/SaveManager/Saveable/CurrencySaveable", fileName = "Default_Currency_Saveable")]
+    [CreateAssetMenu(menuName = "Mobiversite/SaveManager/Saveable/CurrencySaveable", fileName = "Currency_Save_Data")]
     public class CurrencyManagerSaveableSO : SaveableSO
     {
-        public int CurrencyAmount = 0;       
-       
+        public int CurrencyAmount = 0;
+
     }
 }
