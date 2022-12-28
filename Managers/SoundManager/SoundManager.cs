@@ -1,7 +1,5 @@
 using GameLib.ScriptableObjectBases.EventDelegates;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using GameLib.ScriptableObjectBases.Saveables;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -14,7 +12,8 @@ namespace GameLib.Managers.SoundManager
         [SerializeField] private FloatEventDelegateSO SetSFXVolumeRequest;
         [SerializeField] private BooleanEventDelegateSO ChangeMusicStateRequest;
         [SerializeField] private BooleanEventDelegateSO ChangeSFXStateRequest;
-
+        [SerializeField] private SoundManagerSaveableSO SoundData;
+        [SerializeField] private VoidEventDelegateSO SaveRequestDelegate;
         const string MASTER_VOLUME_KEY = "Master_Volume";
         const string MUSIC_VOLUME_KEY = "Music_Volume";
         const string SFX_VOLUME_KEY = "SFX_Volume";
@@ -30,7 +29,8 @@ namespace GameLib.Managers.SoundManager
 
         private void SetSFXState(bool isActive)
         {
-            if (isActive)
+            SoundData.IsSFXActive = isActive;
+            if (SoundData.IsSFXActive)
             {
                 AudioMixer.ClearFloat(SFX_VOLUME_KEY);
             }
@@ -38,11 +38,13 @@ namespace GameLib.Managers.SoundManager
             {
                 SetSFXVolume(0);
             }
+            Save();
         }
 
         private void SetMusicState(bool isActive)
         {
-            if (isActive)
+            SoundData.IsMusicActive = isActive;
+            if (SoundData.IsMusicActive)
             {
                 AudioMixer.ClearFloat(MUSIC_VOLUME_KEY);
             }
@@ -50,7 +52,9 @@ namespace GameLib.Managers.SoundManager
             {
                 SetMusicVolume(0);
             }
+            Save();
         }
+
 
         private void SetSFXVolume(float volume)
         {
@@ -79,5 +83,9 @@ namespace GameLib.Managers.SoundManager
             ChangeSFXStateRequest.UnSubscribe(SetSFXState);
         }
 
+        private void Save()
+        {
+            SaveRequestDelegate?.FireEvent();
+        }
     }
 }

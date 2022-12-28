@@ -8,7 +8,7 @@ namespace GameLib.EditorScripts
 {
 
     [InitializeOnLoad]
-    [CustomEditor(typeof(SceneManager<>), true)]
+    [CustomEditor(typeof(SceneManager), true)]
     public class SceneManagerEditor : Editor
     {
         private dynamic _sceneManager;

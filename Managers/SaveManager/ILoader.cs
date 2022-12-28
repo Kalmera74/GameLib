@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿/// <summary>
+/// Internal interface for loading saved data.
+/// </summary>
 namespace GameLib.Managers.SaveManager
 {
     internal interface ILoader
     {
+        /// <summary>
+        /// Loads saved data.
+        /// </summary>
         public void Load();
     }
 }

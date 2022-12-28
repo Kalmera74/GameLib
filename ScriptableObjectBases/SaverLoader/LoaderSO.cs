@@ -3,6 +3,7 @@ using System.Collections;
 using Newtonsoft.Json;
 using UnityEngine;
 using Newtonsoft.Json.Linq;
+using GameLib.ScriptableObjectBases.Saveables;
 
 namespace GameLib.ScriptableObjectBases.SaverLoader
 {

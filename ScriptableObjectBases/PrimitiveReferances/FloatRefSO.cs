@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameLib.ScriptableObjectBases.PrimitiveReferances
+namespace GameLib.ScriptableObjectBases.PrimitiveReferences
 {
     [CreateAssetMenu(menuName = "Mobiversite/PrimitiveReferences/Create Float Reference", fileName = "Float_Reference")]
     public class FloatRefSO : PrimitiveRefSO<float>

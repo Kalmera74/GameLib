@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿/// <summary>
+/// Internal interface for saving data.
+/// </summary>
 namespace GameLib.Managers.SaveManager
 {
     internal interface ISaver
     {
+        /// <summary>
+        /// Saves data.
+        /// </summary>
         public void Save();
     }
 }

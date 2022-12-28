@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameLib.ScriptableObjectBases.PrimitiveReferances
+namespace GameLib.ScriptableObjectBases.PrimitiveReferences
 {
     [Serializable]
     public class PrimitiveRefSO<T> : ScriptableObject

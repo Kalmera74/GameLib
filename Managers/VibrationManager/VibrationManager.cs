@@ -7,6 +7,7 @@ using static Lofelt.NiceVibrations.HapticPatterns;
 
 using UnityEngine;
 using GameLib.ScriptableObjectBases.EventDelegates;
+using GameLib.ScriptableObjectBases.Saveables;
 
 namespace GameLib.Managers.VibrationManager
 {
@@ -14,7 +15,7 @@ namespace GameLib.Managers.VibrationManager
     public class VibrationManager : MonoBehaviour
     {
 
-        [SerializeField] private HapticSource Source;
+
         [SerializeField] private BooleanEventDelegateSO StateChangeRequest;
         [SerializeField] private VoidEventDelegateSO PlaySelectionHapticRequest;
         [SerializeField] private VoidEventDelegateSO PlaySuccessHapticRequest;
@@ -25,11 +26,15 @@ namespace GameLib.Managers.VibrationManager
         [SerializeField] private VoidEventDelegateSO PlayHeavyImpactHapticRequest;
         [SerializeField] private VoidEventDelegateSO PlayRigidImpactRequest;
         [SerializeField] private VoidEventDelegateSO PlaySoftImpactRequest;
+        [SerializeField] private VibrationManagerSaveableSO VibrationData;
+        [SerializeField] private VoidEventDelegateSO SaveRequestDelegate;
 
-        private bool _canPlayHaptic = true;
 
         void Awake()
         {
+
+
+
             PlaySelectionHapticRequest.Subscribe(PlaySelectionHaptic);
             PlaySuccessHapticRequest.Subscribe(PlaySuccessHaptic);
             PlayWarningHapticRequest.Subscribe(PlayWarningHaptic);
@@ -41,13 +46,16 @@ namespace GameLib.Managers.VibrationManager
             PlaySoftImpactRequest.Subscribe(PlaySoftImpactHaptic);
             StateChangeRequest.Subscribe(ChangeState);
 
-            // ! Get and set the _canPlayHaptic from save system
+
         }
 
         private void ChangeState(bool canPlay)
         {
-            _canPlayHaptic = canPlay;
+            VibrationData.CanVibrate = canPlay;
+            Save();
         }
+
+
 
         private void PlaySelectionHaptic()
         {
@@ -89,13 +97,12 @@ namespace GameLib.Managers.VibrationManager
         private void PlayHaptic(PresetType pattern)
         {
 
-            if (!_canPlayHaptic)
+            if (!VibrationData.CanVibrate)
             {
                 return;
             }
 
-            Source.fallbackPreset = pattern;
-            Source.Play();
+            HapticPatterns.PlayPreset(pattern);
 
         }
 
@@ -110,6 +117,10 @@ namespace GameLib.Managers.VibrationManager
             PlayHeavyImpactHapticRequest.UnSubscribe(PlayHeavyImpactHaptic);
             PlayRigidImpactRequest.UnSubscribe(PlayRigidImpactHaptic);
             PlaySoftImpactRequest.UnSubscribe(PlaySoftImpactHaptic);
+        }
+        private void Save()
+        {
+            SaveRequestDelegate?.FireEvent();
         }
     }
 }

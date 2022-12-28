@@ -1,4 +1,5 @@
 ﻿using GameLib.Managers.SaveManager;
+using GameLib.ScriptableObjectBases.Saveables;
 using System.Collections;
 using UnityEngine;
 
