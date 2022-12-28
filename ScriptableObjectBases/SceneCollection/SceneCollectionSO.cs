@@ -2,41 +2,43 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using GameLib.Managers.SceneManager;
 using UnityEngine;
 using Object = UnityEngine.Object;
 namespace GameLib.ScriptableObjectBases.SceneCollection
 {
-    public abstract class SceneCollectionSO<T> : ScriptableObject
+    [CreateAssetMenu(menuName = "Mobiversite/Data Containers/SceneCollection", fileName = "Scene_Collection_Container")]
+    public class SceneCollectionSO : ScriptableObject
     {
-        [SerializeField] protected List<T> SceneList = new List<T>();
+        [SerializeField] protected List<SceneDefinition> SceneList = new List<SceneDefinition>();
 
-        public virtual void SetList(List<T> list)
+        public virtual void SetList(List<SceneDefinition> list)
         {
-            SceneList = new List<T>(list);
+            SceneList = new List<SceneDefinition>(list);
         }
-        public virtual T GetItemAt(int index)
+        public virtual SceneDefinition GetItemAt(int index)
         {
             dynamic item = null;
             if (index < SceneList.Count)
             {
                 item = SceneList[index];
             }
-            return (T)item;
+            return item;
         }
         public virtual int GetLevelCount()
         {
             return SceneList.Count;
         }
 
-        public virtual T GetLastItem()
+        public virtual SceneDefinition GetLastItem()
         {
-            dynamic item = SceneList.Last();
-            return (T)item;
+            SceneDefinition item = SceneList.Last();
+            return item;
         }
-        public virtual T GetFirstItem()
+        public virtual SceneDefinition GetFirstItem()
         {
-            dynamic item = SceneList.First();
-            return (T)item;
+            SceneDefinition item = SceneList.First();
+            return item;
         }
 
         public virtual void Clear()

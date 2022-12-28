@@ -48,7 +48,7 @@ namespace GameLib.Managers.SceneManager
         /// <summary>
         /// A scene collection that contains the definitions of the scenes in the game.
         /// </summary>
-        [SerializeField] private SceneCollectionSO<SceneDefinition> SceneCollection;
+        [SerializeField] private SceneCollectionSO SceneCollection;
         /// <summary>
         /// An event delegate that triggers before a scene is loaded.
         /// </summary>

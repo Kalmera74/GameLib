@@ -11,7 +11,7 @@ namespace GameLib.Managers.ObjectPoolManager
         /// <summary>
         /// The object pooler for the game objects.
         /// </summary>
-        [SerializeField] private ObjectPoolerSO<GameObject> ObjectPooler;
+        [SerializeField] private ObjectPoolerSO ObjectPooler;
 
         /// <summary>
         /// Initializes the object pooler.
