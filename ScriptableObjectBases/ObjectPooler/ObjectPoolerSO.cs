@@ -73,6 +73,8 @@ namespace GameLib.ScriptableObjectBases.ObjectPooler
             {
                 // Get the number of instances to spawn and the prefab to use for spawning
                 int count = item.AmountToSpawn;
+                int key = item.Object.GetInstanceID();
+
                 GameObject prefab = item.Object;
 
                 // Create a queue of GameObjects for the pooled object
@@ -82,6 +84,10 @@ namespace GameLib.ScriptableObjectBases.ObjectPooler
                 for (int i = 0; i < count; i++)
                 {
                     GameObject obj = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+                    obj.AddComponent<PooledObject>();
+
+                    PooledObject pooledObject = obj.GetComponent<PooledObject>();
+                    pooledObject.ID = key;
                     // Set the object to inactive
                     obj.SetActive(false);
                     // Add the object to the queue
@@ -97,7 +103,7 @@ namespace GameLib.ScriptableObjectBases.ObjectPooler
                 };
 
                 // Add the pooled object data to the dictionary, using the object's instance ID as the key
-                int key = item.Object.GetInstanceID();
+
                 _pool.Add(key, pooledData);
             }
         }
@@ -111,8 +117,9 @@ namespace GameLib.ScriptableObjectBases.ObjectPooler
         /// <returns>The spawned object.</returns>
         public GameObject Spawn(GameObject objectToClone, Vector3 spawnPosition, Quaternion spawnRotation, bool isActive = true)
         {
-            // Try to get the pooled object data for the object to be spawned
-            if (_pool.TryGetValue(objectToClone.GetInstanceID(), out PooledObjectData pooledData))
+            // Try to get the pooled object data for the object to be spawned    
+            int key = objectToClone.GetInstanceID();
+            if (_pool.TryGetValue(key, out PooledObjectData pooledData))
             {
                 // Get the queue of available objects for the pooled object
                 var queue = pooledData.ObjectQueue;
@@ -128,8 +135,18 @@ namespace GameLib.ScriptableObjectBases.ObjectPooler
                     // If new objects should be instantiated on demand, instantiate it and add it to the queue so that queue size increased for feature needs
                     // Then return the cloned object
                     GameObject clonedObject = Instantiate(objectToClone, spawnPosition, spawnRotation);
+                    clonedObject.AddComponent<PooledObject>();
+
+                    PooledObject pooledObject = clonedObject.GetComponent<PooledObject>();
+                    pooledObject.ID = key;
+
                     clonedObject.SetActive(isActive);
-                    queue.Enqueue(clonedObject);
+
+                    if (pooledData.CanBeUsedBeforeReleased)
+                    {
+                        queue.Enqueue(clonedObject);
+                    }
+
                     return clonedObject;
                 }
                 // Dequeue an available object from the queue
@@ -162,8 +179,10 @@ namespace GameLib.ScriptableObjectBases.ObjectPooler
         {
             // Set the object to inactive
             obj.SetActive(false);
+
+            var pooledObject = obj.GetComponent<PooledObject>();
             // Get the object's instance ID
-            int key = obj.GetInstanceID();
+            int key = pooledObject.ID;
             // Add the object to the queue for its respective pooled object
             _pool[key].ObjectQueue.Enqueue(obj);
         }

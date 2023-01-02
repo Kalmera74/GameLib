@@ -12,36 +12,31 @@ namespace GameLib.ScriptableObjectBases.SceneCollection
     {
         [SerializeField] protected List<SceneDefinition> SceneList = new List<SceneDefinition>();
 
-        public virtual void SetList(List<SceneDefinition> list)
+        public  void SetList(List<SceneDefinition> list)
         {
             SceneList = new List<SceneDefinition>(list);
         }
-        public virtual SceneDefinition GetItemAt(int index)
-        {
-            dynamic item = null;
-            if (index < SceneList.Count)
-            {
-                item = SceneList[index];
-            }
-            return item;
+        public SceneDefinition GetItemAt(int index)
+        {            
+            return SceneList[index];
         }
-        public virtual int GetLevelCount()
+        public  int GetLevelCount()
         {
             return SceneList.Count;
         }
 
-        public virtual SceneDefinition GetLastItem()
+        public  SceneDefinition GetLastItem()
         {
             SceneDefinition item = SceneList.Last();
             return item;
         }
-        public virtual SceneDefinition GetFirstItem()
+        public  SceneDefinition GetFirstItem()
         {
             SceneDefinition item = SceneList.First();
             return item;
         }
 
-        public virtual void Clear()
+        public  void Clear()
         {
             SceneList?.Clear();
         }

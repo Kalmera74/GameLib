@@ -6,6 +6,7 @@ using UnityEngine;
 using GameLib.ScriptableObjectBases.Saveables;
 using GameLib.ScriptableObjectBases.SceneCollection;
 using GameLib.ScriptableObjectBases.PrimitiveReferences;
+using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -103,21 +104,28 @@ namespace GameLib.Managers.SceneManager
         /// An event delegate that triggers when a request to save the current state of the scene manager is made.
         /// </summary>
         [SerializeField] private VoidEventDelegateSO SaveRequestDelegate;
+        private LoadSceneMode _sceneLoadMode = LoadSceneMode.Single;
 
         /// <summary>
         /// Initializes the DefaultSceneManager by subscribing to the various event delegates and setting the maximum and minimum indices.
         /// </summary>
-        private void Init()
+        private void Awake()
         {
             LoadLevelRequest.Subscribe(LoadSceneAt);
             NextLevelLoadRequest.Subscribe(LoadNextLevel);
             PreviousLEvelLoadRequest.Subscribe(LoadPreviousLevel);
             ReloadCurrentLevelRequest.Subscribe(ReloadCurrentLevel);
 
-            _maxIndex = SceneCollection.GetLevelCount() - 1;
-            _currentIndexPrimitiveRef.SetValue(SceneData.LastLoadedSceneIndex);
+            _maxIndex = SceneCollection.GetLevelCount();
+            _currentIndexPrimitiveRef.SetValue(0);
         }
 
+        void Start()
+        {
+            _sceneLoadMode = LoadSceneMode.Additive;
+            LoadNextLevel();
+            _sceneLoadMode = LoadSceneMode.Single;
+        }
         /// <summary>
         /// Loads the scene at the specified level index.
         /// </summary>
@@ -140,7 +148,8 @@ namespace GameLib.Managers.SceneManager
 
             int sceneIndex = SceneCollection.GetItemAt(levelIndex).SceneIndex;
 
-            var asyncHandler = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneIndex);
+
+            var asyncHandler = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneIndex, _sceneLoadMode);
 
             while (!asyncHandler.isDone)
             {
@@ -148,7 +157,7 @@ namespace GameLib.Managers.SceneManager
                 yield return null;
             }
             _currentIndexPrimitiveRef.SetValue(levelIndex);
-            Save();
+
             OnAfterLevelLoadedEvent.FireEvent();
         }
 
@@ -158,7 +167,8 @@ namespace GameLib.Managers.SceneManager
         /// </summary>
         private void LoadNextLevel()
         {
-            int nextSceneIndex = SceneCollection.GetItemAt(_currentIndexPrimitiveRef.GetValue() + 1).SceneIndex;
+            int nextIndex = _currentIndexPrimitiveRef.GetValue() + 1;
+            int nextSceneIndex = SceneCollection.GetItemAt(nextIndex).SceneIndex;
 
             if (nextSceneIndex >= _maxIndex)
             {
@@ -238,7 +248,7 @@ namespace GameLib.Managers.SceneManager
         /// </summary>
         private void Save()
         {
-            SceneData.LastLoadedSceneIndex = _currentIndexPrimitiveRef.GetValue();
+
             SaveRequestDelegate.FireEvent();
         }
     }

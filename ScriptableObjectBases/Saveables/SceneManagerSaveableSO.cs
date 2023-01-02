@@ -6,7 +6,7 @@ namespace GameLib.ScriptableObjectBases.Saveables
     [CreateAssetMenu(menuName = "Mobiversite/SaveManager/Saveable/SceneSaveable", fileName = "Scene_Save_Data")]
     public class SceneManagerSaveableSO : SaveableSO
     {
-        public int LastLoadedSceneIndex = -1;
+
 
     }
 }
