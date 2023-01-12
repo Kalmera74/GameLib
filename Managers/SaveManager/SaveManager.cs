@@ -70,13 +70,7 @@ namespace GameLib.Managers.SaveManager
 
             SaveRequestDelegate?.Subscribe(Save);
             LoadRequestDelegate?.Subscribe(Load);
-        }
 
-        /// <summary>
-        /// Loads data when the game starts.
-        /// </summary>
-        void Start()
-        {
             Load();
         }
         /// <summary>

@@ -1,3 +1,4 @@
+using GameLib.Utility;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,8 +9,8 @@ namespace GameLib.ScriptableObjectBases.ObjectPooler
     /// <summary>
     /// ScriptableObject class that represents an object pooler for GameObjects.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mobiversite/Data Containers/ObjectPooling", fileName = "Object_Pool_Container")]
-    public class ObjectPoolerSO : ScriptableObject
+    [CreateAssetMenu(menuName = "Mobiversite/Managers/ObjectPooling", fileName = "Object_Pool_Container")]
+    public class ObjectPoolerSO : ScriptableObject, IInitializable
     {
         /// <summary>
         /// Struct that represents data for a single object in the object pool.
