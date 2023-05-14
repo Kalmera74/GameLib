@@ -1,10 +1,7 @@
 using Object = UnityEngine.Object;
-using GameLib.Utility;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mobiversite
+namespace GameLib.Utility
 {
     public class Initializer : MonoBehaviour
     {
