@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GameLib.ScriptableObjectBases.EventDelegates
 {
-    [CreateAssetMenu(menuName = "Mobiversite/EventDelegates/String Param Event Delegate", fileName = "String_Delegate")]
+    [CreateAssetMenu(menuName = "Game/EventDelegates/String Param Event Delegate", fileName = "String_Delegate")]
     public class StringEventDelegateSO : EventDelegateSO<string>
     {
 

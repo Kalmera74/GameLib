@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GameLib.ScriptableObjectBases.SaverLoader
 {
-    [CreateAssetMenu(menuName = "Mobiversite/SaveManager/List/Default", fileName = "Default_Save_List")]
+    [CreateAssetMenu(menuName = "Game/SaveManager/List/Default", fileName = "Default_Save_List")]
     public class SaveListSO : ScriptableObject
     {
         [SerializeField] private SaveableSO[] SaveObjects;

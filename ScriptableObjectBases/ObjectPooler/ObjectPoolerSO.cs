@@ -9,7 +9,7 @@ namespace GameLib.ScriptableObjectBases.ObjectPooler
     /// <summary>
     /// ScriptableObject class that represents an object pooler for GameObjects.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mobiversite/Managers/ObjectPooling", fileName = "Object_Pool_Container")]
+    [CreateAssetMenu(menuName = "Game/Managers/ObjectPooling", fileName = "Object_Pool_Container")]
     public class ObjectPoolerSO : ScriptableObject, IInitializable
     {
         /// <summary>

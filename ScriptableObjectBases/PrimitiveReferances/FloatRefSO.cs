@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameLib.ScriptableObjectBases.PrimitiveReferences
 {
-    [CreateAssetMenu(menuName = "Mobiversite/PrimitiveReferences/Create Float Reference", fileName = "Float_Reference")]
+    [CreateAssetMenu(menuName = "Game/PrimitiveReferences/Create Float Reference", fileName = "Float_Reference")]
     public class FloatRefSO : PrimitiveRefSO<float>
     {
 

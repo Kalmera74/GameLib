@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GameLib.ScriptableObjectBases.EventDelegates
 {
-    [CreateAssetMenu(menuName = "Mobiversite/EventDelegates/Float Param Event Delegate", fileName = "Float_Delegate")]
+    [CreateAssetMenu(menuName = "Game/EventDelegates/Float Param Event Delegate", fileName = "Float_Delegate")]
     public class FloatEventDelegateSO : EventDelegateSO<float>
     {
 

@@ -1,6 +1,6 @@
 using System;
 
-namespace Mobiversite
+namespace Game
 {
     public class GoogleValidationRequestData
     {

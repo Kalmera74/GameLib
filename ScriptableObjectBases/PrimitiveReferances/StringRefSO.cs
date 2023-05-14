@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameLib.ScriptableObjectBases.PrimitiveReferences
 {
-    [CreateAssetMenu(menuName = "Mobiversite/PrimitiveReferences/Create String Reference", fileName = "String_Reference")]
+    [CreateAssetMenu(menuName = "Game/PrimitiveReferences/Create String Reference", fileName = "String_Reference")]
     public class StringRefSO : PrimitiveRefSO<string>
     {
 

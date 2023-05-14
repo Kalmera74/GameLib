@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GameLib.ScriptableObjectBases.EventDelegates
 {
-    [CreateAssetMenu(menuName = "Mobiversite/EventDelegates/Game Manager/Game State Param Event Delegate", fileName = "GameState_Delegate")]
+    [CreateAssetMenu(menuName = "Game/EventDelegates/Game Manager/Game State Param Event Delegate", fileName = "GameState_Delegate")]
     public class GameStateEventDelegateSO : EventDelegateSO<GameState>
     {
 

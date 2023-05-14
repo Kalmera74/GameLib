@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace Mobiversite
+namespace GameLib.Camera
 {
 
     public class SafeAreaFitter : MonoBehaviour

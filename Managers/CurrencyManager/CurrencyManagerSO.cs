@@ -9,7 +9,7 @@ namespace GameLib.Managers.CurrencyManager
     /// <summary>
     /// A class that manages the currency of a game, including gaining and spending currency, and saving and loading the currency amount.
     /// </summary>
-    [CreateAssetMenu(fileName = "CurrencyManager", menuName = "Mobiversite/Managers/CurrencyManager")]
+    [CreateAssetMenu(fileName = "CurrencyManager", menuName = "Game/Managers/CurrencyManager")]
     public class CurrencyManagerSO : ScriptableObject, IInitializable
     {
         /// <summary>

@@ -8,7 +8,7 @@ namespace GameLib.ScriptableObjectBases.SaverLoader
     /// <summary>
     /// ScriptableObject class that represents a loader for loading saved data.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mobiversite/SaveManager/Loader/Default", fileName = "Default_Loader")]
+    [CreateAssetMenu(menuName = "Game/SaveManager/Loader/Default", fileName = "Default_Loader")]
     public class LoaderSO : ScriptableObject, ILoader
     {
         /// <summary>

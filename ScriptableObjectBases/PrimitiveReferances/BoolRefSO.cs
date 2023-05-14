@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameLib.ScriptableObjectBases.PrimitiveReferences
 {
-    [CreateAssetMenu(menuName = "Mobiversite/PrimitiveReferences/Create Boolean Reference", fileName = "Boolean_Reference")]
+    [CreateAssetMenu(menuName = "Game/PrimitiveReferences/Create Boolean Reference", fileName = "Boolean_Reference")]
     public class BoolRefSO : PrimitiveRefSO<bool>
     {
 

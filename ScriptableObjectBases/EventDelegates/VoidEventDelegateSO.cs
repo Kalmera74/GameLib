@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GameLib.ScriptableObjectBases.EventDelegates
 {
-    [CreateAssetMenu(menuName = "Mobiversite/EventDelegates/Void Event Delegate", fileName = "Void_Delegate")]
+    [CreateAssetMenu(menuName = "Game/EventDelegates/Void Event Delegate", fileName = "Void_Delegate")]
     public class VoidEventDelegateSO : ScriptableObject
     {
 

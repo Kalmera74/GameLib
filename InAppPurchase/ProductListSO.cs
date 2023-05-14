@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GameLib.InAppPurchase
 {
-    [CreateAssetMenu(menuName ="Mobiversite/IAP",fileName ="ProductList")]
+    [CreateAssetMenu(menuName ="Game/IAP",fileName ="ProductList")]
     public class ProductListSO : ScriptableObject
     {
         public List<ProductSO> Products;

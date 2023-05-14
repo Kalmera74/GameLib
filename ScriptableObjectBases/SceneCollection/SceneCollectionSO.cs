@@ -7,7 +7,7 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 namespace GameLib.ScriptableObjectBases.SceneCollection
 {
-    [CreateAssetMenu(menuName = "Mobiversite/Data Containers/SceneCollection", fileName = "Scene_Collection_Container")]
+    [CreateAssetMenu(menuName = "Game/Data Containers/SceneCollection", fileName = "Scene_Collection_Container")]
     public class SceneCollectionSO : ScriptableObject
     {
         [SerializeField] protected List<SceneDefinition> SceneList = new List<SceneDefinition>();

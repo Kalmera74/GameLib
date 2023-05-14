@@ -8,7 +8,7 @@ namespace GameLib.ScriptableObjectBases.Bridges
     /// <summary>
     /// ScriptableObject class that represents a haptic controller.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mobiversite/Vibration/Default", fileName = "Haptic_Controller")]
+    [CreateAssetMenu(menuName = "Game/Vibration/Default", fileName = "Haptic_Controller")]
     public class HapticSO : ScriptableObject
     {
         /// <summary>
